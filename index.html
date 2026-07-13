@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="home">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>רותי גוטמן · ריברסינג — נשימה טיפולית</title>
+<meta name="description" content="ריברסינג — נשימה טיפולית מעגלית עם רותי גוטמן. לנשום לרווחה, לשאוף גבוה.">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="container nav-inner">
+    <div class="brand-col">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3c2 3 6 4 6 8a6 6 0 0 1-12 0c0-4 4-5 6-8Z"/><path d="M12 21v-6"/></svg></span>
+        <span class="brand-text"><b>רותי גוטמן</b><span>מטפלת רגשית בריברסינג</span></span>
+      </a>
+      <span class="brand-phone">053-2771754</span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html" class="active">בית</a>
+      <a href="whatis.html">מהו ריברסינג</a>
+      <a href="poster.html">מתנת הנשימה</a>
+      <a href="about.html">אודותי</a>
+      <a href="faq.html">שאלות נפוצות</a>
+      <a href="contact.html">יצירת קשר</a>
+    </nav>
+    <button class="nav-toggle" aria-label="תפריט"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+
+<!-- ============ HOME: סרטון מסך-מלא + לוגו בלבד ============ -->
+<section class="hero-video">
+  <video class="hero-video__bg" autoplay muted loop playsinline poster="assets/video_poster.jpg">
+    <source src="assets/video.mp4" type="video/mp4">
+    הדפדפן שלך אינו תומך בהצגת וידאו.
+  </video>
+  <div class="hero-video__scrim" aria-hidden="true"></div>
+
+  <div class="hero-video__text">
+    <h1 data-typewords>
+      <span class="word">ריברסינג</span> <span class="word">-</span> <span class="word">נשימה</span> <span class="word accent">טיפולית</span>
+    </h1>
+    <p class="hero-video__tagline">לשאוף גבוה, לנשום לרווחה...</p>
+  </div>
+</section>
+
+<!-- ============ מפגש ריברסינג במתנה ============ -->
+<section class="sec gift-offer">
+  <div class="container">
+    <div class="gift-card reveal">
+      <div class="gift-box" aria-hidden="true">
+        <span class="gift-lid"></span>
+        <span class="gift-ribbon-h"></span>
+        <span class="gift-ribbon-v"></span>
+        <span class="gift-bow"><i></i><i></i></span>
+      </div>
+      <div class="gift-content">
+        <span class="eyebrow">מתנה בשבילך</span>
+        <h2 class="section-title">מפגש ריברסינג ראשון — במתנה</h2>
+        <p>נעים להכיר. אני מזמינה אותך למפגש היכרות וטעימה מעולם הנשימה הטיפולית — כמתנה ממני אליך, ללא עלות וללא התחייבות. בואו נשום יחד לרווחה.</p>
+        <a class="btn btn-primary" href="contact.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8"/><path d="M2 7h20v5H2z"/><path d="M12 21V7"/><path d="M12 7S9.5 3 7 3a2.5 2.5 0 0 0 0 5c3 0 5-1 5-1Z"/><path d="M12 7s2.5-4 5-4a2.5 2.5 0 0 1 0 5c-3 0-5-1-5-1Z"/></svg>
+          לקבלת המתנה
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER (מינימלי) ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border:none;padding-top:0">© <span id="yr"></span> רותי גוטמן · מטפלת רגשית בריברסינג · כל הזכויות שמורות</div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
