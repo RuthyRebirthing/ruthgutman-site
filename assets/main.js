@@ -71,19 +71,31 @@
   const isHome = document.documentElement.classList.contains('home');
   if (!isHome) {
 
-    /* ---------- פרפר SVG (בהשראת הלוגו) ---------- */
+    /* ---------- פרפר SVG מפורט ומציאותי (בהשראת הלוגו) ---------- */
     function butterflySVG() {
       return '<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">' +
-        '<g fill="currentColor">' +
-        '<path d="M60 52C44 20 24 10 14 20 4 30 8 54 30 62 44 66 56 60 60 52Z" fill-opacity=".92"/>' +
-        '<path d="M60 52C76 20 96 10 106 20 116 30 112 54 90 62 76 66 64 60 60 52Z" fill-opacity=".92"/>' +
-        '<path d="M60 56C50 74 34 84 28 100 24 112 42 112 54 92 60 82 62 66 60 56Z" fill-opacity=".62"/>' +
-        '<path d="M60 56C70 74 86 84 92 100 96 112 78 112 66 92 60 82 58 66 60 56Z" fill-opacity=".62"/>' +
+        // כנפיים — מתאר עדין להגדרה
+        '<g fill="currentColor" stroke="currentColor" stroke-opacity=".28" stroke-width="1">' +
+        '<path d="M60 53C73 27 90 15 103 23 116 32 113 54 92 63 78 69 65 64 60 53Z" fill-opacity=".92"/>' +
+        '<path d="M60 53C47 27 30 15 17 23 4 32 7 54 28 63 42 69 55 64 60 53Z" fill-opacity=".92"/>' +
+        '<path d="M60 57C69 73 83 81 87 97 89 109 75 109 66 93 61 85 59 69 60 57Z" fill-opacity=".72"/>' +
+        '<path d="M60 57C51 73 37 81 33 97 31 109 45 109 54 93 59 85 61 69 60 57Z" fill-opacity=".72"/>' +
         '</g>' +
-        '<ellipse cx="60" cy="63" rx="3.1" ry="16" fill="#D9A94C"/>' +
-        '<circle cx="60" cy="45" r="3.8" fill="#D9A94C"/>' +
-        '<path d="M60 43C55 32 50 28 45 25M60 43C65 32 70 28 75 25" stroke="#D9A94C" stroke-width="1.6" stroke-linecap="round" fill="none"/>' +
-        '<circle cx="45" cy="25" r="2" fill="#D9A94C"/><circle cx="75" cy="25" r="2" fill="#D9A94C"/>' +
+        // סימני כנף בהירים (התחושה ה"אמיתית")
+        '<g fill="#ffffff" fill-opacity=".5">' +
+        '<circle cx="89" cy="37" r="4.6"/><circle cx="31" cy="37" r="4.6"/>' +
+        '<circle cx="79" cy="90" r="3.1"/><circle cx="41" cy="90" r="3.1"/>' +
+        '</g>' +
+        '<g fill="#D9A94C" fill-opacity=".9">' +
+        '<circle cx="98" cy="30" r="2.5"/><circle cx="22" cy="30" r="2.5"/>' +
+        '</g>' +
+        // גוף מקטעי בגוון זהב
+        '<ellipse cx="60" cy="64" rx="3.3" ry="17" fill="#C98F33"/>' +
+        '<ellipse cx="60" cy="51" rx="3.6" ry="6.5" fill="#D9A94C"/>' +
+        '<circle cx="60" cy="44" r="3.7" fill="#C98F33"/>' +
+        // מחושים עם ראשי אלה
+        '<path d="M60 44C55 33 50 28 44 25M60 44C65 33 70 28 76 25" stroke="#C98F33" stroke-width="1.8" stroke-linecap="round" fill="none"/>' +
+        '<circle cx="44" cy="25" r="2.4" fill="#D9A94C"/><circle cx="76" cy="25" r="2.4" fill="#D9A94C"/>' +
         '</svg>';
     }
 
@@ -92,23 +104,15 @@
     sky.className = 'decor-sky';
     sky.setAttribute('aria-hidden', 'true');
 
-    // פרפרי רקע דהויים: [left%, top%, size, opacity, rotate, color]
+    // פרפרי רקע דהויים — מעטים ובתוך גבולות המסך (לא נחתכים): [left%, top%, size, opacity, rotate, color]
     const marks = [
-      [5, 13, 200, .10, -14, 'var(--teal-400)'],
-      [83, 7, 150, .09, 16, 'var(--teal-500)'],
-      [87, 58, 220, .07, -8, 'var(--teal-300)'],
-      [2, 64, 172, .08, 12, 'var(--teal-400)'],
-      [45, 87, 132, .06, 6, 'var(--teal-500)'],
-      [70, 33, 92, .11, 20, 'var(--gold)'],
-      [22, 42, 80, .12, -18, 'var(--gold)']
+      [8, 22, 120, .07, -8, 'var(--teal-300)'],
+      [60, 60, 120, .06, 8, 'var(--teal-400)']
     ];
-    // פרפרים מרחפים (מונפשים): [left%, top%, size, opacity, color, class]
+    // פרפרים מרחפים (מונפשים) — כמה בודדים: [left%, top%, size, opacity, color, class]
     const floats = [
-      [8, 22, 72, .42, 'var(--teal-400)', ''],
-      [86, 26, 58, .36, 'var(--gold)', 's2'],
-      [79, 72, 82, .32, 'var(--teal-500)', 's3'],
-      [13, 78, 54, .38, 'var(--teal-300)', ''],
-      [50, 15, 48, .32, 'var(--gold-soft)', 's2']
+      [74, 18, 58, .40, 'var(--gold)', ''],
+      [12, 68, 54, .34, 'var(--teal-400)', 's2']
     ];
     marks.forEach(function (m) {
       const d = document.createElement('div');
@@ -221,7 +225,8 @@
         if (!running) return;
         resize();
         const now = (window.performance && performance.now) ? performance.now() : Date.now();
-        gl.uniform1f(uT, (now - start) / 1000);
+        // האטה משמעותית של תנועת המים (0.2 ≈ פי 5 איטי יותר)
+        gl.uniform1f(uT, (now - start) / 1000 * 0.2);
         gl.drawArrays(gl.TRIANGLES, 0, 3);
         requestAnimationFrame(loop);
       }
@@ -240,8 +245,9 @@
     }
 
     /* ---------- הרכבת ההירו של המים בראש הדף ---------- */
+    // בדפים עם תמונת ים ברקע (bg-waves) — לא מזריקים מים מלאכותיים כלל
     const head = document.querySelector('.page-head');
-    if (head) {
+    if (head && !document.body.classList.contains('bg-waves')) {
       const cv = document.createElement('canvas');
       cv.className = 'head-water';
       cv.setAttribute('aria-hidden', 'true');
