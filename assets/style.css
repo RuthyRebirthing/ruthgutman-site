@@ -98,7 +98,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;color:var(--te
 .nav.scrolled .brand-col{gap:3px}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:nowrap}
 .brand-col{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;text-align:center}
-.brand{display:flex;flex-direction:row;align-items:center;gap:11px}
+.brand{display:flex;flex-direction:column;align-items:center;gap:4px}
 .brand-mark{
   width:48px;height:48px;border-radius:50%;flex-shrink:0;
   background:#fff url('logo_mark.png') center/88% no-repeat;
@@ -566,7 +566,10 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;color:var(--te
   .benefits-grid{grid-template-columns:1fr;gap:4px;max-width:440px}
   .ben-center{order:-1;margin-bottom:12px}
   .ben-center__emblem{max-width:210px}
-  .ben-col--left .ben-item{flex-direction:row}
+  /* מובייל — אייקון למעלה והכיתוב ממורכז מתחתיו */
+  .ben-item,
+  .ben-col--left .ben-item{flex-direction:column;text-align:center;gap:12px}
+  .ben-item p{text-align:center}
   .ben-col{margin-bottom:16px}
   .ben-leaf{width:118px}
   .ben-waves svg{height:92px}
@@ -708,13 +711,17 @@ html{overflow-x:hidden}
 
 /* ---------- טאבלט ומטה: תפריט קומפקטי ---------- */
 @media(max-width:1080px){
-  .nav-inner{gap:8px}
-  .brand-col{flex-direction:row;align-items:center;gap:10px;flex-shrink:1;min-width:0}
-  .brand{flex-direction:row;align-items:center;gap:9px;text-align:start;min-width:0}
-  .brand-mark{width:44px;height:44px}
-  .brand-text{min-width:0}
-  .brand-text b{line-height:1.1;overflow:hidden;text-overflow:ellipsis}
-  .brand-text span{overflow:hidden;text-overflow:ellipsis}
+  .nav-inner{gap:8px;flex-wrap:nowrap}
+  .brand-col{flex:1 1 auto;min-width:0;flex-direction:row;align-items:center;justify-content:flex-start;gap:9px}
+  .brand{flex:1 1 auto;min-width:0;flex-direction:row;align-items:center;gap:9px}
+  .brand-mark{width:44px;height:44px;flex-shrink:0}
+  .brand-text{min-width:0;overflow:hidden}
+  .brand-text b,.brand-text span{
+    display:block;white-space:nowrap;text-align:right;
+    overflow:hidden;text-overflow:ellipsis;max-width:100%;
+  }
+  .brand-text b{line-height:1.1}
+  .nav-toggle{flex-shrink:0}
   /* מספר הטלפון הנפרד מוסתר בתפריט הנייד (זמין בתפריט ובדף יצירת קשר) */
   .brand-phone{display:none}
 
@@ -783,4 +790,337 @@ html{overflow-x:hidden}
   .faq-item summary{font-size:1rem;padding:16px 18px;gap:10px}
   .faq-item .faq-body{padding:0 18px 20px}
   .benefits-inner{padding-bottom:96px}
+}
+
+/* ============================================================
+   ✦✦✦  עיצוב פרימיום — כל הדפים הפנימיים (לא דף הבית)  ✦✦✦
+   רקע חי עם מוטיבים של ריברסינג: פרפרים · בועות · גלי מים
+   כתב גדול · כותרות דרמטיות · כרטיסי זכוכית · מבטאי זהב
+   ============================================================ */
+
+/* ---- רקע חי לכל הדפים הפנימיים ---- */
+html:not(.home){
+  background:
+    radial-gradient(1200px 700px at 85% -8%, rgba(31,160,166,.20), transparent 60%),
+    radial-gradient(1000px 700px at 8% 108%, rgba(217,169,76,.14), transparent 60%),
+    linear-gradient(165deg,#F4FAF8 0%,#E4F2EE 46%,#CDE9E6 100%);
+  background-attachment:fixed;
+}
+html:not(.home) body{background:transparent}
+
+/* ---- שכבת מוטיבים מרחפים (מוזרקת ע"י main.js) ---- */
+.decor-sky{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.decor-sky .bf{position:absolute;line-height:0;will-change:transform}
+.decor-sky .bf svg{width:100%;height:auto;display:block}
+.decor-sky .bf-float{animation:bfFloat 17s ease-in-out infinite}
+.decor-sky .bf-float.s2{animation-duration:23s;animation-delay:-7s}
+.decor-sky .bf-float.s3{animation-duration:20s;animation-delay:-13s}
+@keyframes bfFloat{
+  0%{transform:translateY(0) rotate(-3deg)}
+  50%{transform:translateY(-30px) rotate(5deg)}
+  100%{transform:translateY(0) rotate(-3deg)}
+}
+.decor-sky .bubble{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%, rgba(255,255,255,.85), rgba(143,212,210,.4) 58%, rgba(31,160,166,.12));
+  box-shadow:inset 0 0 8px rgba(255,255,255,.6), 0 0 10px rgba(143,212,210,.3);
+  animation:bubbleRise linear infinite;
+}
+@keyframes bubbleRise{
+  0%{transform:translateY(30px) scale(.7);opacity:0}
+  12%{opacity:.55}
+  88%{opacity:.4}
+  100%{transform:translateY(-92vh) scale(1.15);opacity:0}
+}
+
+/* ---- כותרת עמוד דרמטית + גלי מים מונפשים ---- */
+html:not(.home) .page-head{
+  padding:210px 0 150px;overflow:hidden;
+  /* גיבוי אם WebGL לא נתמך — מים בטורקיז עמוק */
+  background:
+    radial-gradient(1000px 520px at 50% -10%, rgba(31,160,166,.5), transparent 62%),
+    linear-gradient(160deg, var(--teal-700) 0%, var(--teal-900) 100%);
+}
+/* קנבס המים האמיתיים (WebGL) */
+.head-water{position:absolute;inset:0;z-index:0;width:100%;height:100%;display:block}
+/* שכשוך מים עדין ברקע דף "מתנת הנשימה" */
+.pg-water{opacity:.5;mix-blend-mode:soft-light}
+/* הצללה עדינה לקריאוּת הכותרת מעל המים */
+.head-scrim{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(closest-side at 50% 44%, rgba(6,42,46,.5), rgba(6,42,46,.12) 68%, transparent),
+    linear-gradient(180deg, rgba(6,42,46,.42) 0%, rgba(6,42,46,0) 26%);
+}
+html:not(.home) .page-head .container{position:relative;z-index:3}
+html:not(.home) .page-head .eyebrow{
+  font-size:.94rem;padding:11px 24px;letter-spacing:.16em;
+  background:rgba(255,255,255,.22);color:#fff;backdrop-filter:blur(6px);
+  box-shadow:0 8px 24px rgba(12,70,75,.18);
+}
+html:not(.home) .page-head .eyebrow::before{background:var(--gold-soft)}
+html:not(.home) .page-head h1{
+  font-size:clamp(2.9rem,6.6vw,4.8rem);font-weight:900;line-height:1.12;color:#fff;
+  text-shadow:0 6px 34px rgba(0,0,0,.45), 0 2px 10px rgba(6,42,46,.5);
+}
+html:not(.home) .page-head h1 .accent{color:var(--gold-soft)}
+html:not(.home) .page-head p{
+  font-size:clamp(1.15rem,2.4vw,1.42rem);color:#fff;
+  font-weight:500;opacity:.95;max-width:760px;line-height:1.7;
+  text-shadow:0 3px 20px rgba(0,0,0,.4);
+}
+
+/* גלי מים זורמים בתחתית הכותרת */
+.head-waves{position:absolute;left:0;right:0;bottom:-1px;height:150px;z-index:2;pointer-events:none;overflow:hidden}
+.head-waves svg{position:absolute;bottom:0;left:0;width:200%;height:100%;display:block}
+.head-waves .wv{will-change:transform}
+.head-waves .w1{animation:waveFlow 19s linear infinite}
+.head-waves .w2{animation:waveFlow 27s linear infinite reverse}
+.head-waves .w3{animation:waveFlow 15s linear infinite}
+@keyframes waveFlow{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---- טיפוגרפיה גדולה יותר בגוף הדפים ---- */
+html:not(.home) .section-title{font-size:clamp(2.2rem,4.8vw,3.4rem)}
+html:not(.home) .eyebrow{font-size:.9rem}
+html:not(.home) .btn{font-size:1.12rem;padding:17px 34px}
+html:not(.home) .btn svg{width:22px;height:22px}
+
+/* ---- כרטיסי זכוכית עם מבטא זהב ---- */
+html:not(.home) .card,
+html:not(.home) .tst{
+  background:rgba(255,255,255,.74);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.75);
+  box-shadow:0 22px 55px rgba(12,70,75,.15);
+  position:relative;overflow:hidden;
+}
+html:not(.home) .card{padding:44px 34px}
+html:not(.home) .card::before,
+html:not(.home) .tst::before{
+  content:"";position:absolute;inset-inline:0;top:0;height:5px;
+  background:linear-gradient(90deg,var(--teal-400),var(--gold-soft),var(--gold));
+}
+html:not(.home) .card:hover{transform:translateY(-10px);box-shadow:0 30px 70px rgba(12,70,75,.22)}
+html:not(.home) .card-icon{width:76px;height:76px;border-radius:22px;box-shadow:0 10px 24px rgba(18,136,143,.2)}
+html:not(.home) .card-icon svg{width:38px;height:38px}
+html:not(.home) .card h3{font-size:1.62rem;margin-bottom:12px}
+html:not(.home) .card p{font-size:1.16rem;color:var(--muted)}
+
+/* ---- מהו ריברסינג — פאנל זכוכית קריא מעל הרקע ---- */
+html:not(.home) .whatis-text{
+  background:rgba(255,255,255,.6);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.7);border-radius:30px;
+  padding:48px 50px;box-shadow:0 24px 60px rgba(12,70,75,.12);
+}
+html:not(.home) .whatis-text p{font-size:1.26rem;line-height:1.9;margin-bottom:20px;color:var(--ink)}
+html:not(.home) .whatis-text p:last-child{margin-bottom:0}
+html:not(.home) .whatis-text .gift{
+  font-size:1.55rem;line-height:1.6;padding:28px 32px;margin-bottom:28px;
+  background:linear-gradient(135deg, rgba(205,233,230,.95), rgba(255,255,255,.8));
+  border-inline-start:6px solid var(--gold);
+  box-shadow:0 16px 40px rgba(12,70,75,.12);
+}
+
+/* ---- אודות ---- */
+html:not(.home) .about-text h2{font-size:2.5rem;margin-bottom:20px}
+html:not(.home) .about-text p{font-size:1.24rem;line-height:1.85}
+html:not(.home) .about-photo{
+  background:radial-gradient(circle at 50% 38%, var(--teal-200), var(--teal-500) 74%, var(--teal-700));
+  box-shadow:0 34px 80px rgba(12,70,75,.30), inset 0 0 70px rgba(255,255,255,.22);
+}
+html:not(.home) .about-photo::before{
+  content:"";position:absolute;inset:7%;border-radius:inherit;
+  border:2px dashed rgba(255,255,255,.45);animation:ringSpin 44s linear infinite;
+}
+@keyframes ringSpin{to{transform:rotate(360deg)}}
+html:not(.home) .about-photo img{position:relative;z-index:2}
+html:not(.home) .about-photo .ph-name{font-size:1.7rem;z-index:2}
+html:not(.home) .about-badges{margin-top:26px}
+html:not(.home) .badge{
+  font-size:1.02rem;padding:11px 22px;
+  background:rgba(255,255,255,.72);backdrop-filter:blur(6px);
+  border:1px solid var(--teal-200);color:var(--teal-700);
+  box-shadow:0 8px 20px rgba(12,70,75,.08);
+}
+
+/* ---- חוות דעת ---- */
+html:not(.home) .tst{padding:38px 32px}
+html:not(.home) .tst .quote{font-size:4.2rem;color:var(--gold-soft);height:40px}
+html:not(.home) .tst p{font-size:1.15rem;line-height:1.75;color:var(--ink)}
+html:not(.home) .tst-foot .nm{font-size:1.08rem}
+html:not(.home) .tst-foot .av{width:50px;height:50px}
+
+/* ---- שאלות נפוצות ---- */
+html:not(.home) .faq-item{
+  background:rgba(255,255,255,.78);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.75);border-radius:22px;
+  box-shadow:0 16px 42px rgba(12,70,75,.10);
+}
+html:not(.home) .faq-item[open]{border-color:var(--teal-400);box-shadow:0 22px 55px rgba(12,70,75,.16)}
+html:not(.home) .faq-item summary{font-size:1.34rem;padding:26px 30px;gap:16px}
+html:not(.home) .faq-item summary .q-ico{width:42px;height:42px;font-size:1.5rem}
+html:not(.home) .faq-item .faq-body{font-size:1.18rem;line-height:1.85;padding:0 30px 28px 78px}
+
+/* ---- יצירת קשר ---- */
+html:not(.home) .contact-card{
+  background:rgba(255,255,255,.78);backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.75);padding:48px;
+  box-shadow:0 26px 60px rgba(12,70,75,.14);
+}
+html:not(.home) .contact-card h2{font-size:2.1rem;margin-bottom:10px}
+html:not(.home) .contact-list li{padding:18px 0}
+html:not(.home) .contact-ico{width:54px;height:54px;border-radius:16px}
+html:not(.home) .contact-ico svg{width:26px;height:26px}
+html:not(.home) .contact-list .k{font-size:.95rem}
+html:not(.home) .contact-list .v{font-size:1.24rem}
+html:not(.home) .form-field label{font-size:1.06rem}
+html:not(.home) .form-field input,
+html:not(.home) .form-field textarea{
+  font-size:1.06rem;padding:16px 18px;background:rgba(255,255,255,.7);
+}
+
+/* ---- מתנת הנשימה (poster) — הגדלת כתב ---- */
+.benefits-head h1{font-size:clamp(2.4rem,5.6vw,3.9rem)}
+.ben-col__title{font-size:1.34rem;padding:14px 34px}
+.ben-item p{font-size:1.32rem}
+
+/* ---- התאמות מובייל לעיצוב הפרימיום ---- */
+@media(max-width:760px){
+  html:not(.home) .page-head{padding:132px 0 110px}
+  .head-waves{height:96px}
+  html:not(.home) .whatis-text{padding:30px 24px}
+  html:not(.home) .whatis-text p{font-size:1.14rem}
+  html:not(.home) .whatis-text .gift{font-size:1.28rem;padding:22px 24px}
+  html:not(.home) .about-text h2{font-size:2rem;text-align:center}
+  html:not(.home) .about-text p{font-size:1.14rem}
+  html:not(.home) .card{padding:30px 24px}
+  html:not(.home) .card h3{font-size:1.42rem}
+  html:not(.home) .card p{font-size:1.08rem}
+  html:not(.home) .faq-item summary{font-size:1.12rem;padding:18px 20px;gap:12px}
+  html:not(.home) .faq-item .faq-body{font-size:1.08rem;padding:0 20px 22px}
+  html:not(.home) .contact-card{padding:28px 22px}
+  html:not(.home) .contact-list .v{font-size:1.12rem}
+  .ben-item p{font-size:1.12rem}
+  .decor-sky .bf{opacity:.5 !important}
+}
+@media(max-width:480px){
+  html:not(.home) .page-head{padding:120px 0 92px}
+  .head-waves{height:72px}
+}
+@media(prefers-reduced-motion:reduce){
+  .decor-sky .bf-float,.decor-sky .bubble,.head-waves .wv,.about-photo::before{animation:none !important}
+}
+
+/* ============================================================
+   ✦ מדיה בעמודים — איורים (unDraw בצבעי המותג) + וידאו אמיתי
+   בצורות מגוונות: מסגרת עגולה · פאנל זכוכית · רצועה · וידאו
+   ============================================================ */
+
+/* --- בלוק צד-לצד: איור + טקסט --- */
+.media-split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;max-width:1060px;margin:0 auto}
+.media-split .ms-text .eyebrow{margin-bottom:16px}
+.media-split .ms-text h2{font-size:clamp(2rem,4.2vw,2.9rem);margin-bottom:16px}
+.media-split .ms-text p{font-size:1.24rem;line-height:1.85;color:var(--ink);margin-bottom:14px}
+.media-split .ms-text p:last-child{margin-bottom:0}
+
+/* --- מסגרת עגולה טורקיז לאיור --- */
+.media-round{
+  position:relative;width:min(400px,86%);aspect-ratio:1;margin:0 auto;border-radius:50%;
+  display:grid;place-items:center;
+  background:radial-gradient(circle at 50% 40%, var(--mint-100), var(--teal-200) 70%, var(--teal-400));
+  box-shadow:0 34px 80px rgba(12,70,75,.26), inset 0 0 60px rgba(255,255,255,.35);
+}
+.media-round::before{
+  content:"";position:absolute;inset:6%;border-radius:50%;
+  border:2px dashed rgba(255,255,255,.55);animation:ringSpin 46s linear infinite;
+}
+.media-round img{width:72%;position:relative;z-index:2;filter:drop-shadow(0 14px 26px rgba(12,70,75,.22))}
+
+/* --- פאנל זכוכית לאיור --- */
+.ill-panel{
+  background:rgba(255,255,255,.62);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.72);border-radius:32px;padding:40px;
+  box-shadow:0 24px 60px rgba(12,70,75,.14);display:grid;place-items:center;position:relative;overflow:hidden;
+}
+.ill-panel::before{content:"";position:absolute;inset-inline:0;top:0;height:5px;background:linear-gradient(90deg,var(--teal-400),var(--gold-soft),var(--gold))}
+.ill-panel img{width:100%;max-width:430px}
+
+/* --- רצועת איורים (למי מתאים) --- */
+.ill-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1060px;margin:52px auto 0}
+.ill-strip .item{
+  background:rgba(255,255,255,.72);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.72);border-radius:26px;padding:34px 26px 30px;text-align:center;
+  box-shadow:0 18px 46px rgba(12,70,75,.12);transition:transform .3s ease, box-shadow .3s ease;
+}
+.ill-strip .item:hover{transform:translateY(-8px);box-shadow:0 28px 64px rgba(12,70,75,.2)}
+.ill-strip .ill-ring{
+  width:150px;height:150px;margin:0 auto 20px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 50% 42%, #fff, var(--mint-100) 72%, var(--teal-200));
+  box-shadow:inset 0 4px 14px rgba(255,255,255,.7), 0 12px 26px rgba(12,70,75,.14);
+}
+.ill-strip .ill-ring img{width:66%}
+.ill-strip h3{font-size:1.4rem;margin-bottom:8px}
+.ill-strip p{color:var(--muted);font-size:1.08rem}
+
+/* --- מסגרת וידאו אמיתי --- */
+.video-frame{
+  position:relative;max-width:820px;margin:14px auto 0;border-radius:30px;overflow:hidden;
+  border:9px solid #fff;box-shadow:0 34px 80px rgba(12,70,75,.24);background:#08363a;
+}
+.video-frame video{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+.video-frame::after{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:22px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.4);
+}
+
+@media(max-width:1080px){
+  .media-split{grid-template-columns:1fr;gap:34px}
+  .ill-strip{grid-template-columns:1fr;max-width:440px}
+}
+@media(max-width:760px){
+  .media-split .ms-text h2{text-align:center}
+  .media-split .ms-text p{font-size:1.12rem;text-align:center}
+  .video-frame{border-width:6px}
+}
+
+/* ============================================================
+   ✦ אייקוני זהב אלגנטיים (במקום איורים)
+   ============================================================ */
+.gold-emblem{
+  position:relative;border-radius:50%;display:grid;place-items:center;flex-shrink:0;
+  background:radial-gradient(circle at 50% 36%, #fff, #FBF3DE 64%, #F0E1BA);
+  border:2px solid rgba(217,169,76,.6);
+  box-shadow:0 22px 52px rgba(12,70,75,.16), inset 0 3px 14px rgba(255,255,255,.85);
+}
+.gold-emblem::before{
+  content:"";position:absolute;inset:11%;border-radius:50%;
+  border:1.5px dashed rgba(217,169,76,.5);
+}
+.gold-emblem::after{
+  content:"";position:absolute;inset:-6%;border-radius:50%;
+  background:radial-gradient(circle at 50% 40%, rgba(217,169,76,.16), transparent 68%);
+  z-index:-1;
+}
+.gold-emblem svg{
+  position:relative;z-index:2;
+  stroke:#C6912E;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
+  filter:drop-shadow(0 3px 6px rgba(184,134,46,.28));
+}
+.gold-emblem.lg{width:min(300px,74%);aspect-ratio:1;margin:0 auto}
+.gold-emblem.lg svg{width:40%;height:40%}
+.gold-emblem.md{width:132px;height:132px;margin:0 auto 22px}
+.gold-emblem.md svg{width:46%;height:46%}
+
+/* קריאה לפעולה ממורכזת (שאלות נפוצות) */
+.faq-cta{
+  max-width:680px;margin:0 auto;text-align:center;
+  background:rgba(255,255,255,.66);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.72);border-radius:32px;
+  padding:52px 46px;box-shadow:0 24px 60px rgba(12,70,75,.14);
+}
+.faq-cta h2{font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:14px}
+.faq-cta p{font-size:1.2rem;line-height:1.8;color:var(--muted);margin-bottom:26px}
+@media(max-width:760px){
+  .gold-emblem.lg{width:min(230px,66%)}
+  .faq-cta{padding:36px 24px}
+  .faq-cta p{font-size:1.08rem}
 }
