@@ -133,6 +133,7 @@
           <input type="hidden" name="access_key" value="dcf24acf-2bed-4401-b0d6-9c0027652cd5">
           <input type="hidden" name="subject" value="פנייה חדשה מהאתר">
           <input type="hidden" name="from_name" value="אתר רותי גוטמן">
+          <input type="hidden" name="redirect" value="https://ruthgutman.co.il/thanks.html">
           <!-- מלכודת ספאם (נשאר ריק — בוטים ממלאים אותו) -->
           <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true">
 
@@ -187,62 +188,16 @@
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
 
+  // שליחה רגילה של HTML — בלי fetch, כך שהכפתור לא יכול להיתקע.
+  // ה-JS כאן רק מתעד את מועד ההסכמה; גם אם הוא נכשל, הטופס עדיין נשלח.
   var form = document.getElementById('contact-form');
   var btn = document.getElementById('cf-submit');
-  var status = document.getElementById('cf-status');
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    btn.disabled = true;
+  form.addEventListener('submit', function () {
+    try {
+      document.getElementById('cf-consent-time').value = new Date().toLocaleString('he-IL');
+    } catch (e) { /* לא חוסם את השליחה */ }
     btn.textContent = 'שולח…';
-    status.style.display = 'none';
-
-    // תיעוד מועד ההסכמה — נדרש להוכחת הסכמה לפי חוק
-    document.getElementById('cf-consent-time').value = new Date().toLocaleString('he-IL');
-
-    // עצירה אחרי 20 שניות — כך הכפתור לעולם לא נתקע על "שולח…"
-    var ctrl = new AbortController();
-    var timer = setTimeout(function () { ctrl.abort(); }, 20000);
-    var httpCode = 0;
-
-    // Web3Forms מעדיף JSON — ממירים את שדות הטופס לאובייקט
-    var payload = {};
-    new FormData(form).forEach(function (v, k) { payload[k] = v; });
-
-    fetch(form.action, {
-      method: 'POST',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      signal: ctrl.signal
-    })
-    .then(function (r) {
-      httpCode = r.status;
-      return r.json().catch(function () { return { success: false, message: 'HTTP ' + r.status }; });
-    })
-    .then(function (data) {
-      if (data.success === 'true' || data.success === true) {
-        form.reset();
-        status.textContent = '✓ ההודעה נשלחה! אחזור אליכם בהקדם.';
-        status.style.color = '#2e7d5b';
-        status.style.display = 'block';
-        btn.textContent = 'נשלח בהצלחה';
-      } else {
-        throw new Error(data.message || 'failed');
-      }
-    })
-    .catch(function (err) {
-      var detail = (err && err.name === 'AbortError') ? 'timeout — אין תגובה מהשרת'
-                 : (err && err.message) ? err.message : 'שגיאה לא ידועה';
-      status.innerHTML = 'לא הצלחנו לשלוח את ההודעה כרגע. ' +
-        'אפשר להתקשר <a href="tel:+972532771754">053-2771754</a> ' +
-        'או לשלוח <a href="https://wa.me/972532771754">וואטסאפ</a>.' +
-        '<br><small style="opacity:.8">[' + httpCode + '] ' + detail + '</small>';
-      status.style.color = '#c0392b';
-      status.style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'שליחת הודעה';
-    })
-    .then(function () { clearTimeout(timer); });
   });
 </script>
 </body>
