@@ -187,13 +187,16 @@
 <script src="assets/main.js"></script>
 <script src="assets/a11y.js"></script>
 <script>
+(function () {
+  'use strict';
   document.getElementById('yr').textContent = new Date().getFullYear();
 
   // שליחה רגילה של HTML אל iframe נסתר — בלי fetch, כך שהכפתור לא נתקע
   // והדף לא מתחלף. ה-iframe מדווח בסיום הטעינה, ואז מוצגת הודעת ההצלחה.
+  // הערה: אין לקרוא למשתנה status — הוא מתנגש עם window.status המובנה.
   var form = document.getElementById('contact-form');
   var btn = document.getElementById('cf-submit');
-  var status = document.getElementById('cf-status');
+  var toast = document.getElementById('cf-status');
   var sink = document.getElementById('cf-sink');
   var pending = false;
   var hideTimer;
@@ -205,7 +208,8 @@
     pending = true;
     btn.disabled = true;
     btn.textContent = 'שולח…';
-    status.style.display = 'none';
+    toast.style.display = 'none';
+    toast.classList.remove('is-visible');
     clearTimeout(hideTimer);
   });
 
@@ -217,16 +221,19 @@
     btn.disabled = false;
     btn.textContent = 'שליחת הודעה';
 
-    status.innerHTML = '<span aria-hidden="true">✓</span> ההודעה נשלחה בהצלחה! אחזור אליכם בהקדם.';
-    status.style.display = 'block';
-    status.classList.add('is-visible');
+    toast.innerHTML = '<span aria-hidden="true">✓</span> ההודעה נשלחה בהצלחה! אחזור אליכם בהקדם.';
+    toast.style.display = 'block';
+    // מאלץ חישוב מחדש כדי שמעבר ה-opacity ירוץ מיד אחרי display:block
+    void toast.offsetWidth;
+    toast.classList.add('is-visible');
 
     // ההודעה נעלמת אחרי 6 שניות והטופס מוכן לשליחה נוספת
     hideTimer = setTimeout(function () {
-      status.classList.remove('is-visible');
-      setTimeout(function () { status.style.display = 'none'; }, 400);
+      toast.classList.remove('is-visible');
+      setTimeout(function () { toast.style.display = 'none'; }, 400);
     }, 6000);
   });
+}());
 </script>
 </body>
 </html>
