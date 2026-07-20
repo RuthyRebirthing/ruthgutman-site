@@ -204,10 +204,15 @@
     // תיעוד מועד ההסכמה — נדרש להוכחת הסכמה לפי חוק
     document.getElementById('cf-consent-time').value = new Date().toLocaleString('he-IL');
 
+    // עצירה אחרי 20 שניות — כך הכפתור לעולם לא נתקע על "שולח…"
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, 20000);
+
     fetch(form.action, {
       method: 'POST',
       headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
+      body: new FormData(form),
+      signal: ctrl.signal
     })
     .then(function (r) { return r.json(); })
     .then(function (data) {
@@ -218,16 +223,19 @@
         status.style.display = 'block';
         btn.textContent = 'נשלח בהצלחה';
       } else {
-        throw new Error('failed');
+        throw new Error(data.message || 'failed');
       }
     })
     .catch(function () {
-      status.textContent = 'אירעה שגיאה בשליחה. נסו שוב, או התקשרו 053-2771754.';
+      status.innerHTML = 'לא הצלחנו לשלוח את ההודעה כרגע. ' +
+        'אפשר להתקשר <a href="tel:+972532771754">053-2771754</a> ' +
+        'או לשלוח <a href="https://wa.me/972532771754">וואטסאפ</a>.';
       status.style.color = '#c0392b';
       status.style.display = 'block';
       btn.disabled = false;
       btn.textContent = 'שליחת הודעה';
-    });
+    })
+    .then(function () { clearTimeout(timer); });
   });
 </script>
 </body>
