@@ -29,6 +29,7 @@
 <meta name="theme-color" content="#8FC8C2">
 
 <link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/a11y.css">
 
 <script type="application/ld+json">
 {
@@ -137,7 +138,7 @@
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_captcha" value="false">
           <!-- מלכודת ספאם (נשאר ריק — בוטים ממלאים אותו) -->
-          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
 
           <div class="form-field">
             <label for="cf-name">שם מלא</label>
@@ -151,6 +152,17 @@
             <label for="cf-msg">הודעה</label>
             <textarea id="cf-msg" name="הודעה" rows="4"></textarea>
           </div>
+
+          <!-- הסכמה למדיניות פרטיות (חובה, לא מסומן מראש) -->
+          <div class="consent-field">
+            <input type="checkbox" id="cf-privacy" name="אישור מדיניות פרטיות" value="כן — אושר" required>
+            <label for="cf-privacy">קראתי ואני מאשר/ת את <a href="privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a> ואת השימוש בפרטיי לצורך יצירת קשר חוזר. <span aria-hidden="true">*</span><span class="sr-only">שדה חובה</span></label>
+          </div>
+
+          <!-- תיעוד ההסכמה כנדרש בחוק -->
+          <input type="hidden" id="cf-consent-time" name="מועד ההסכמה" value="">
+          <input type="hidden" name="מקור ההסכמה" value="טופס יצירת קשר — ruthgutman.co.il">
+
           <button type="submit" id="cf-submit" class="btn btn-primary" style="width:100%;justify-content:center">שליחת הודעה</button>
           <p id="cf-status" style="margin-top:14px;text-align:center;display:none"></p>
         </form>
@@ -169,11 +181,13 @@
         <div class="ll-sub">מטפלת רגשית בריברסינג</div>
       </div>
     </div>
-    <div class="footer-bottom">© <span id="yr"></span> רותי גוטמן · מטפלת רגשית בריברסינג באשדוד · כל הזכויות שמורות</div>
+    <div class="footer-bottom">© <span id="yr"></span> רותי גוטמן · מטפלת רגשית בריברסינג באשדוד · כל הזכויות שמורות
+      <div class="legal-links"><a href="accessibility.html">הצהרת נגישות</a><span>·</span><a href="privacy.html">מדיניות פרטיות</a></div></div>
   </div>
 </footer>
 
 <script src="assets/main.js"></script>
+<script src="assets/a11y.js"></script>
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
 
@@ -186,6 +200,9 @@
     btn.disabled = true;
     btn.textContent = 'שולח…';
     status.style.display = 'none';
+
+    // תיעוד מועד ההסכמה — נדרש להוכחת הסכמה לפי חוק
+    document.getElementById('cf-consent-time').value = new Date().toLocaleString('he-IL');
 
     fetch(form.action, {
       method: 'POST',

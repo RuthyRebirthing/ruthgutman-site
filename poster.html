@@ -29,6 +29,7 @@
 <meta name="theme-color" content="#8FC8C2">
 
 <link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/a11y.css">
 </head>
 <body>
 
@@ -131,6 +132,15 @@
   </div>
 </section>
 
+<footer class="footer" style="padding:26px 0">
+  <div class="container" style="text-align:center">
+    <div class="footer-bottom" style="border:none;padding-top:0">© <span id="yr"></span> רותי גוטמן · מטפלת רגשית בריברסינג באשדוד · כל הזכויות שמורות
+      <div class="legal-links"><a href="accessibility.html">הצהרת נגישות</a><span>·</span><a href="privacy.html">מדיניות פרטיות</a></div></div>
+  </div>
+</footer>
+
 <script src="assets/main.js"></script>
+<script src="assets/a11y.js"></script>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 </body>
 </html>
