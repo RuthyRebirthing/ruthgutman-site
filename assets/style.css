@@ -1232,3 +1232,37 @@ html:not(.home) .form-field textarea{
   .faq-cta{padding:36px 24px}
   .faq-cta p{font-size:1.08rem}
 }
+
+/* ============================================================
+   הקטנה גלובלית של האתר
+   ------------------------------------------------------------
+   כל האתר מוקטן באחוזים — טקסטים, ריווחים, כפתורים ותמונות יחד.
+   לשינוי עוצמת ההקטנה יש לערוך ערך אחד בלבד: --ui-scale
+   (0.9 = 90% מהגודל המקורי · 0.85 = 85% · 1 = ללא הקטנה)
+   ============================================================ */
+:root{ --ui-scale:0.9; }
+
+html{ zoom:var(--ui-scale); }
+
+/* פיצוי על ההקטנה באזורים שגובהם נמדד לפי גובה המסך,
+   כדי שלא ייווצר פס ריק בתחתית הסרטון / הפוסטר */
+.hero{ min-height:calc(100vh / var(--ui-scale)) }
+.hero--home{ min-height:calc(100vh / var(--ui-scale)) }
+.benefits{ min-height:calc(100vh / var(--ui-scale)) }
+.poster-full{ height:calc(100dvh / var(--ui-scale)) }
+.hero-video{
+  height:calc(100dvh / var(--ui-scale));
+  min-height:calc(100svh / var(--ui-scale));
+}
+@supports not (height:100dvh){
+  .hero-video{
+    height:calc(100vh / var(--ui-scale));
+    min-height:calc(100vh / var(--ui-scale));
+  }
+  .poster-full{ height:calc(100vh / var(--ui-scale)) }
+}
+
+/* תפריט המובייל הנפתח — גובה מסך מלא */
+@media(max-width:1080px){
+  .nav-links{ height:calc(100vh / var(--ui-scale)) }
+}
