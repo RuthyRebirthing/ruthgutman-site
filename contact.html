@@ -128,12 +128,13 @@
       <!-- טופס -->
       <div class="contact-card reveal d1">
         <h2>השאירו הודעה</h2>
-        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-          <!-- הגדרות Web3Forms (החליף את FormSubmit שחסום ברשתות ישראליות) -->
+        <!-- השליחה מכוונת ל-iframe נסתר, כך שהדף אינו מתחלף -->
+        <iframe name="cf-sink" id="cf-sink" style="display:none" title="יעד שליחה נסתר" aria-hidden="true"></iframe>
+        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" target="cf-sink">
+          <!-- הגדרות Web3Forms (החליף את FormSubmit שנפל גלובלית) -->
           <input type="hidden" name="access_key" value="dcf24acf-2bed-4401-b0d6-9c0027652cd5">
           <input type="hidden" name="subject" value="פנייה חדשה מהאתר">
           <input type="hidden" name="from_name" value="אתר רותי גוטמן">
-          <input type="hidden" name="redirect" value="https://ruthgutman.co.il/thanks.html">
           <!-- מלכודת ספאם (נשאר ריק — בוטים ממלאים אותו) -->
           <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true">
 
@@ -161,7 +162,7 @@
           <input type="hidden" name="מקור ההסכמה" value="טופס יצירת קשר — ruthgutman.co.il">
 
           <button type="submit" id="cf-submit" class="btn btn-primary" style="width:100%;justify-content:center">שליחת הודעה</button>
-          <p id="cf-status" style="margin-top:14px;text-align:center;display:none"></p>
+          <p id="cf-status" class="form-toast" role="status" aria-live="polite"></p>
         </form>
       </div>
 
@@ -188,16 +189,43 @@
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
 
-  // שליחה רגילה של HTML — בלי fetch, כך שהכפתור לא יכול להיתקע.
-  // ה-JS כאן רק מתעד את מועד ההסכמה; גם אם הוא נכשל, הטופס עדיין נשלח.
+  // שליחה רגילה של HTML אל iframe נסתר — בלי fetch, כך שהכפתור לא נתקע
+  // והדף לא מתחלף. ה-iframe מדווח בסיום הטעינה, ואז מוצגת הודעת ההצלחה.
   var form = document.getElementById('contact-form');
   var btn = document.getElementById('cf-submit');
+  var status = document.getElementById('cf-status');
+  var sink = document.getElementById('cf-sink');
+  var pending = false;
+  var hideTimer;
 
   form.addEventListener('submit', function () {
     try {
       document.getElementById('cf-consent-time').value = new Date().toLocaleString('he-IL');
     } catch (e) { /* לא חוסם את השליחה */ }
+    pending = true;
+    btn.disabled = true;
     btn.textContent = 'שולח…';
+    status.style.display = 'none';
+    clearTimeout(hideTimer);
+  });
+
+  sink.addEventListener('load', function () {
+    if (!pending) return;   // מתעלמים מטעינת ה-iframe הראשונית
+    pending = false;
+
+    form.reset();           // ניקוי הנתונים לשליחת הודעה נוספת
+    btn.disabled = false;
+    btn.textContent = 'שליחת הודעה';
+
+    status.innerHTML = '<span aria-hidden="true">✓</span> ההודעה נשלחה בהצלחה! אחזור אליכם בהקדם.';
+    status.style.display = 'block';
+    status.classList.add('is-visible');
+
+    // ההודעה נעלמת אחרי 6 שניות והטופס מוכן לשליחה נוספת
+    hideTimer = setTimeout(function () {
+      status.classList.remove('is-visible');
+      setTimeout(function () { status.style.display = 'none'; }, 400);
+    }, 6000);
   });
 </script>
 </body>

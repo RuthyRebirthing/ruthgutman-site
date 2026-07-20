@@ -1266,3 +1266,20 @@ html{ zoom:var(--ui-scale); }
 @media(max-width:1080px){
   .nav-links{ height:calc(100vh / var(--ui-scale)) }
 }
+
+/* ---- הודעת אישור קטנה בטופס יצירת הקשר ---- */
+.form-toast{
+  display:none;margin-top:16px;padding:13px 18px;border-radius:14px;
+  background:#E8F6EE;border:1px solid #B7E0C8;color:#1E7A4C;
+  font-weight:700;font-size:.97rem;text-align:center;line-height:1.5;
+  opacity:0;transform:translateY(-6px);transition:opacity .35s ease,transform .35s ease;
+}
+.form-toast.is-visible{opacity:1;transform:translateY(0)}
+.form-toast span{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:21px;height:21px;margin-left:7px;border-radius:50%;
+  background:#1E7A4C;color:#fff;font-size:.78rem;vertical-align:-4px;
+}
+@media(prefers-reduced-motion:reduce){
+  .form-toast{transition:none}
+}
