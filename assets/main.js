@@ -66,68 +66,16 @@
 
   /* ============================================================
      ✦ מוטיבים חיים של ריברסינג — דפים פנימיים בלבד (לא דף הבית)
-     מים אמיתיים (WebGL caustics) · גלים זורמים · פרפרים · בועות
+     מים אמיתיים (WebGL caustics) · גלים זורמים · בועות
      ============================================================ */
   const isHome = document.documentElement.classList.contains('home');
   if (!isHome) {
 
-    /* ---------- פרפר SVG מפורט ומציאותי (בהשראת הלוגו) ---------- */
-    function butterflySVG() {
-      return '<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">' +
-        // כנפיים — מתאר עדין להגדרה
-        '<g fill="currentColor" stroke="currentColor" stroke-opacity=".28" stroke-width="1">' +
-        '<path d="M60 53C73 27 90 15 103 23 116 32 113 54 92 63 78 69 65 64 60 53Z" fill-opacity=".92"/>' +
-        '<path d="M60 53C47 27 30 15 17 23 4 32 7 54 28 63 42 69 55 64 60 53Z" fill-opacity=".92"/>' +
-        '<path d="M60 57C69 73 83 81 87 97 89 109 75 109 66 93 61 85 59 69 60 57Z" fill-opacity=".72"/>' +
-        '<path d="M60 57C51 73 37 81 33 97 31 109 45 109 54 93 59 85 61 69 60 57Z" fill-opacity=".72"/>' +
-        '</g>' +
-        // סימני כנף בהירים (התחושה ה"אמיתית")
-        '<g fill="#ffffff" fill-opacity=".5">' +
-        '<circle cx="89" cy="37" r="4.6"/><circle cx="31" cy="37" r="4.6"/>' +
-        '<circle cx="79" cy="90" r="3.1"/><circle cx="41" cy="90" r="3.1"/>' +
-        '</g>' +
-        '<g fill="#D9A94C" fill-opacity=".9">' +
-        '<circle cx="98" cy="30" r="2.5"/><circle cx="22" cy="30" r="2.5"/>' +
-        '</g>' +
-        // גוף מקטעי בגוון זהב
-        '<ellipse cx="60" cy="64" rx="3.3" ry="17" fill="#C98F33"/>' +
-        '<ellipse cx="60" cy="51" rx="3.6" ry="6.5" fill="#D9A94C"/>' +
-        '<circle cx="60" cy="44" r="3.7" fill="#C98F33"/>' +
-        // מחושים עם ראשי אלה
-        '<path d="M60 44C55 33 50 28 44 25M60 44C65 33 70 28 76 25" stroke="#C98F33" stroke-width="1.8" stroke-linecap="round" fill="none"/>' +
-        '<circle cx="44" cy="25" r="2.4" fill="#D9A94C"/><circle cx="76" cy="25" r="2.4" fill="#D9A94C"/>' +
-        '</svg>';
-    }
-
-    /* ---------- שכבת פרפרים + בועות מרחפים ---------- */
+    /* ---------- שכבת בועות מרחפות ---------- */
     const sky = document.createElement('div');
     sky.className = 'decor-sky';
     sky.setAttribute('aria-hidden', 'true');
 
-    // פרפרי רקע דהויים — מעטים ובתוך גבולות המסך (לא נחתכים): [left%, top%, size, opacity, rotate, color]
-    const marks = [
-      [8, 22, 120, .07, -8, 'var(--teal-300)'],
-      [60, 60, 120, .06, 8, 'var(--teal-400)']
-    ];
-    // פרפרים מרחפים (מונפשים) — כמה בודדים: [left%, top%, size, opacity, color, class]
-    const floats = [
-      [74, 18, 58, .40, 'var(--gold)', ''],
-      [12, 68, 54, .34, 'var(--teal-400)', 's2']
-    ];
-    marks.forEach(function (m) {
-      const d = document.createElement('div');
-      d.className = 'bf';
-      d.style.cssText = 'left:' + m[0] + '%;top:' + m[1] + '%;width:' + m[2] + 'px;opacity:' + m[3] + ';color:' + m[5] + ';transform:rotate(' + m[4] + 'deg)';
-      d.innerHTML = butterflySVG();
-      sky.appendChild(d);
-    });
-    floats.forEach(function (f) {
-      const d = document.createElement('div');
-      d.className = 'bf bf-float ' + f[5];
-      d.style.cssText = 'left:' + f[0] + '%;top:' + f[1] + '%;width:' + f[2] + 'px;opacity:' + f[3] + ';color:' + f[4];
-      d.innerHTML = butterflySVG();
-      sky.appendChild(d);
-    });
     // בועות עולות: [left%, top%, size, duration s, delay s]
     const bubbles = [
       [10, 88, 16, 15, 0], [24, 94, 10, 12, 3], [38, 90, 22, 19, 6],

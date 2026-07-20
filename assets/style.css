@@ -3,8 +3,6 @@
    פלטת צבעים נגזרת מהפוסטר: טורקיז · קרם · זהב
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@300;400;500;700;900&display=swap');
-
 :root{
   /* פלטה חזקה ורוויה — נגזרת ישירות מהפוסטר */
   --teal-900:#0C464B;
@@ -31,8 +29,8 @@
   --radius-lg:34px;
   --maxw:1180px;
 
-  --serif:'Frank Ruhl Libre', serif;
-  --sans:'Heebo', system-ui, sans-serif;
+  --serif:Tahoma, Arial, system-ui, sans-serif;
+  --sans:Tahoma, Arial, system-ui, sans-serif;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -873,7 +871,7 @@ html{overflow-x:hidden}
 
 /* ============================================================
    ✦✦✦  עיצוב פרימיום — כל הדפים הפנימיים (לא דף הבית)  ✦✦✦
-   רקע חי עם מוטיבים של ריברסינג: פרפרים · בועות · גלי מים
+   רקע חי עם מוטיבים של ריברסינג: בועות · גלי מים
    כתב גדול · כותרות דרמטיות · כרטיסי זכוכית · מבטאי זהב
    ============================================================ */
 
@@ -931,16 +929,6 @@ body.bg-waves .sec-mint{background:transparent}
 
 /* ---- שכבת מוטיבים מרחפים (מוזרקת ע"י main.js) ---- */
 .decor-sky{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.decor-sky .bf{position:absolute;line-height:0;will-change:transform}
-.decor-sky .bf svg{width:100%;height:auto;display:block}
-.decor-sky .bf-float{animation:bfFloat 17s ease-in-out infinite}
-.decor-sky .bf-float.s2{animation-duration:23s;animation-delay:-7s}
-.decor-sky .bf-float.s3{animation-duration:20s;animation-delay:-13s}
-@keyframes bfFloat{
-  0%{transform:translateY(0) rotate(-3deg)}
-  50%{transform:translateY(-30px) rotate(5deg)}
-  100%{transform:translateY(0) rotate(-3deg)}
-}
 .decor-sky .bubble{
   position:absolute;border-radius:50%;
   background:radial-gradient(circle at 34% 30%, rgba(255,255,255,.85), rgba(143,212,210,.4) 58%, rgba(31,160,166,.12));
@@ -1121,14 +1109,13 @@ html:not(.home) .form-field textarea{
   html:not(.home) .contact-card{padding:28px 22px}
   html:not(.home) .contact-list .v{font-size:1.12rem}
   .ben-item p{font-size:1.12rem}
-  .decor-sky .bf{opacity:.5 !important}
 }
 @media(max-width:480px){
   html:not(.home) .page-head{padding:120px 0 92px}
   .head-waves{height:72px}
 }
 @media(prefers-reduced-motion:reduce){
-  .decor-sky .bf-float,.decor-sky .bubble,.head-waves .wv,.about-photo::before{animation:none !important}
+  .decor-sky .bubble,.head-waves .wv,.about-photo::before{animation:none !important}
 }
 
 /* ============================================================
