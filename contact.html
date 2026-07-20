@@ -132,13 +132,13 @@
       <!-- טופס -->
       <div class="contact-card reveal d1">
         <h2>השאירו הודעה</h2>
-        <form id="contact-form" action="https://formsubmit.co/ajax/r0532771754@gmail.com" method="POST">
-          <!-- הגדרות FormSubmit -->
-          <input type="hidden" name="_subject" value="פנייה חדשה מהאתר">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
+        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+          <!-- הגדרות Web3Forms — יש להדביק את מפתח הגישה מהמייל -->
+          <input type="hidden" name="access_key" value="PASTE-YOUR-ACCESS-KEY-HERE">
+          <input type="hidden" name="subject" value="פנייה חדשה מהאתר">
+          <input type="hidden" name="from_name" value="אתר רותי גוטמן">
           <!-- מלכודת ספאם (נשאר ריק — בוטים ממלאים אותו) -->
-          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true">
 
           <div class="form-field">
             <label for="cf-name">שם מלא</label>
