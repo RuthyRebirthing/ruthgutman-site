@@ -5,7 +5,8 @@
 (function () {
   'use strict';
 
-  var STORE = 'rg_a11y';
+  // גרסת המפתח — שינוי הגרסה מאפס הגדרות תקועות מבדיקות קודמות
+  var STORE = 'rg_a11y_v2';
   var COOKIE_KEY = 'rg_cookie_consent';
   var root = document.documentElement;
 
@@ -18,6 +19,7 @@
   }
 
   /* ---------- מצב הנגישות השמור ---------- */
+  try { localStorage.removeItem('rg_a11y'); } catch (e) {} // ניקוי מפתח ישן
   var state = read(STORE, { font: 0, contrast: false, links: false, stop: false, readable: false });
 
   function apply() {
@@ -25,7 +27,8 @@
     root.classList.toggle('a11y-links', !!state.links);
     root.classList.toggle('a11y-stop', !!state.stop);
     root.classList.toggle('a11y-readable', !!state.readable);
-    var steps = [100, 112, 125, 140];
+    // הגדלה מתונה — כדי שהאתר לא "יתפוצץ" בלחיצה אחת
+    var steps = [100, 108, 116, 125];
     root.style.fontSize = state.font ? steps[state.font] + '%' : '';
     write(STORE, state);
     syncButtons();
@@ -131,11 +134,12 @@
       var btn = e.target.closest('[data-a11y]');
       if (!btn) return;
       var key = btn.getAttribute('data-a11y');
+      var lbl = document.getElementById('a11y-font-label');
       if (key === 'reset') {
         state = { font: 0, contrast: false, links: false, stop: false, readable: false };
+        if (lbl) lbl.textContent = 'הגדלת טקסט';
       } else if (key === 'font') {
         state.font = (state.font + 1) % 4;
-        var lbl = document.getElementById('a11y-font-label');
         if (lbl) lbl.textContent = state.font ? 'טקסט מוגדל (' + (state.font + 1) + '/4)' : 'הגדלת טקסט';
       } else {
         state[key] = !state[key];
@@ -156,17 +160,13 @@
     bar.innerHTML =
       '<p>האתר עושה שימוש בעוגיות (Cookies) לצורך תפעול תקין, שמירת העדפות נגישות וניתוח תנועה סטטיסטי. ' +
       'לפרטים ראו את <a href="privacy.html">מדיניות הפרטיות</a>.</p>' +
-      '<button type="button" class="cb-accept">אישור</button>' +
-      '<button type="button" class="cb-decline">עוגיות חיוניות בלבד</button>';
+      '<button type="button" class="cb-accept">הבנתי</button>';
     document.body.appendChild(bar);
     bar.setAttribute('data-open', 'true');
 
     bar.addEventListener('click', function (e) {
       if (e.target.classList.contains('cb-accept')) {
-        write(COOKIE_KEY, { choice: 'all', at: new Date().toISOString() });
-        bar.remove();
-      } else if (e.target.classList.contains('cb-decline')) {
-        write(COOKIE_KEY, { choice: 'essential', at: new Date().toISOString() });
+        write(COOKIE_KEY, { choice: 'acknowledged', at: new Date().toISOString() });
         bar.remove();
       }
     });

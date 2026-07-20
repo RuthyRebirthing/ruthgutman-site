@@ -134,8 +134,6 @@ html.a11y-readable body,html.a11y-readable body *:not(.a11y-panel):not(.a11y-pan
   padding:9px 22px;border:2px solid #fff;background:#fff;color:#0C464B;
 }
 .cookie-bar button:hover{background:#E7C97E;border-color:#E7C97E}
-.cookie-bar .cb-decline{background:transparent;color:#fff}
-.cookie-bar .cb-decline:hover{background:rgba(255,255,255,.15)}
 
 /* ---------- קישורי משפטי בפוטר (נשען על עיצוב הפוטר הקיים) ---------- */
 .legal-links{
