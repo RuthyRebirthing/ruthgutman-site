@@ -133,8 +133,8 @@
       <div class="contact-card reveal d1">
         <h2>השאירו הודעה</h2>
         <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-          <!-- הגדרות Web3Forms — יש להדביק את מפתח הגישה מהמייל -->
-          <input type="hidden" name="access_key" value="PASTE-YOUR-ACCESS-KEY-HERE">
+          <!-- הגדרות Web3Forms (החליף את FormSubmit שחסום ברשתות ישראליות) -->
+          <input type="hidden" name="access_key" value="dcf24acf-2bed-4401-b0d6-9c0027652cd5">
           <input type="hidden" name="subject" value="פנייה חדשה מהאתר">
           <input type="hidden" name="from_name" value="אתר רותי גוטמן">
           <!-- מלכודת ספאם (נשאר ריק — בוטים ממלאים אותו) -->
@@ -208,10 +208,14 @@
     var ctrl = new AbortController();
     var timer = setTimeout(function () { ctrl.abort(); }, 20000);
 
+    // Web3Forms מעדיף JSON — ממירים את שדות הטופס לאובייקט
+    var payload = {};
+    new FormData(form).forEach(function (v, k) { payload[k] = v; });
+
     fetch(form.action, {
       method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(form),
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
       signal: ctrl.signal
     })
     .then(function (r) { return r.json(); })
