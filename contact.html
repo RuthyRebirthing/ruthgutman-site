@@ -203,6 +203,7 @@
     // עצירה אחרי 20 שניות — כך הכפתור לעולם לא נתקע על "שולח…"
     var ctrl = new AbortController();
     var timer = setTimeout(function () { ctrl.abort(); }, 20000);
+    var httpCode = 0;
 
     // Web3Forms מעדיף JSON — ממירים את שדות הטופס לאובייקט
     var payload = {};
@@ -214,7 +215,10 @@
       body: JSON.stringify(payload),
       signal: ctrl.signal
     })
-    .then(function (r) { return r.json(); })
+    .then(function (r) {
+      httpCode = r.status;
+      return r.json().catch(function () { return { success: false, message: 'HTTP ' + r.status }; });
+    })
     .then(function (data) {
       if (data.success === 'true' || data.success === true) {
         form.reset();
@@ -226,10 +230,13 @@
         throw new Error(data.message || 'failed');
       }
     })
-    .catch(function () {
+    .catch(function (err) {
+      var detail = (err && err.name === 'AbortError') ? 'timeout — אין תגובה מהשרת'
+                 : (err && err.message) ? err.message : 'שגיאה לא ידועה';
       status.innerHTML = 'לא הצלחנו לשלוח את ההודעה כרגע. ' +
         'אפשר להתקשר <a href="tel:+972532771754">053-2771754</a> ' +
-        'או לשלוח <a href="https://wa.me/972532771754">וואטסאפ</a>.';
+        'או לשלוח <a href="https://wa.me/972532771754">וואטסאפ</a>.' +
+        '<br><small style="opacity:.8">[' + httpCode + '] ' + detail + '</small>';
       status.style.color = '#c0392b';
       status.style.display = 'block';
       btn.disabled = false;
