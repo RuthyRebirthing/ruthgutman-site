@@ -440,12 +440,12 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;color:var(--te
 .hero-video__text{position:relative;z-index:2;text-align:center;padding:24px;max-width:1000px}
 .hero-video__text h1{
   color:#fff;font-weight:900;line-height:1.16;margin:0;
-  font-size:clamp(1.8rem,4.6vw,3rem);text-shadow:0 6px 34px rgba(0,0,0,.55);
+  font-size:clamp(2.6rem,6.4vw,4.4rem);text-shadow:0 6px 34px rgba(0,0,0,.55);
 }
 .hero-video__text h1 .word{display:inline-block;opacity:0;filter:blur(8px);transform:translateY(18px)}
-.hero-video__text h1 .accent{color:var(--gold-soft)}
+.hero-video__text h1 .accent{color:#fff}
 .hero-video__tagline{
-  margin:16px 0 0;color:#fff;font-weight:700;font-family:var(--serif);
+  margin:16px 0 0;color:var(--gold-soft);font-weight:700;font-family:var(--serif);
   font-size:clamp(2.1rem,5.2vw,3.5rem);line-height:1.2;
   text-shadow:0 5px 28px rgba(0,0,0,.55);
   opacity:0;transform:translateY(18px);transition:opacity 1s ease, transform 1s ease;
