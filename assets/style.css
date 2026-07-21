@@ -137,12 +137,18 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;color:var(--te
   display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
   background:linear-gradient(135deg,#25D366,#128C7E);color:#fff !important;
   font-weight:700;font-size:1.02rem;padding:9px 18px;border-radius:999px;
-  margin-inline-start:34px;box-shadow:0 6px 18px rgba(18,140,126,.35);
+  margin-inline-start:0;box-shadow:0 6px 18px rgba(18,140,126,.35);
   transition:transform .25s ease, box-shadow .25s ease;
 }
 .nav-wa::after{display:none !important}
 .nav-wa:hover{color:#fff !important;transform:translateY(-2px);box-shadow:0 10px 26px rgba(18,140,126,.45)}
 .nav-wa svg{width:19px;height:19px}
+/* גרסת דסקטופ של כפתור הוואטסאפ - מוצמדת לקצה השמאלי (מחוץ לתפריט הממורכז) */
+.nav-wa-desktop{display:none}
+@media(min-width:1081px){
+  .nav-links .nav-wa{display:none}
+  .nav-wa-desktop{display:inline-flex}
+}
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--teal-900)}
 .nav-toggle svg{width:30px;height:30px}
 
