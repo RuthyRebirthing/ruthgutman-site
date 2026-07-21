@@ -147,7 +147,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;color:var(--te
 .nav-wa-desktop{display:none}
 @media(min-width:1081px){
   .nav-links .nav-wa{display:none}
-  .nav-wa-desktop{display:inline-flex}
+  .nav-wa-desktop{display:inline-flex;margin-inline-end:clamp(40px,7vw,120px)}
 }
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--teal-900)}
 .nav-toggle svg{width:30px;height:30px}
