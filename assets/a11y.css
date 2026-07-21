@@ -1,5 +1,5 @@
 /* ============================================================
-   נגישות + פרטיות — שכבת עזר
+   נגישות + פרטיות - שכבת עזר
    נוספה בלי לשנות את העיצוב הקיים של האתר
    ============================================================ */
 
@@ -111,7 +111,7 @@ html.a11y-readable body,html.a11y-readable body *:not(.a11y-panel):not(.a11y-pan
   line-height:1.9 !important;
 }
 
-/* כיבוד העדפת מערכת — הפחתת תנועה */
+/* כיבוד העדפת מערכת - הפחתת תנועה */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}
   html{scroll-behavior:auto}

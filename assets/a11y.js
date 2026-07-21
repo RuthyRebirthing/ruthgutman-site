@@ -1,11 +1,11 @@
 /* ============================================================
    נגישות (ת"י 5568 רמה AA) + הודעת עוגיות
-   נטען בכל דפי האתר — לא משנה את העיצוב הקיים
+   נטען בכל דפי האתר - לא משנה את העיצוב הקיים
    ============================================================ */
 (function () {
   'use strict';
 
-  // גרסת המפתח — שינוי הגרסה מאפס הגדרות תקועות מבדיקות קודמות
+  // גרסת המפתח - שינוי הגרסה מאפס הגדרות תקועות מבדיקות קודמות
   var STORE = 'rg_a11y_v2';
   var COOKIE_KEY = 'rg_cookie_consent';
   var root = document.documentElement;
@@ -27,7 +27,7 @@
     root.classList.toggle('a11y-links', !!state.links);
     root.classList.toggle('a11y-stop', !!state.stop);
     root.classList.toggle('a11y-readable', !!state.readable);
-    // הגדלה מתונה — כדי שהאתר לא "יתפוצץ" בלחיצה אחת
+    // הגדלה מתונה - כדי שהאתר לא "יתפוצץ" בלחיצה אחת
     var steps = [100, 108, 116, 125];
     root.style.fontSize = state.font ? steps[state.font] + '%' : '';
     write(STORE, state);

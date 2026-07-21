@@ -1,4 +1,4 @@
-/* ריברסינג · רותי גוטמן — סקריפט אתר */
+/* ריברסינג · רותי גוטמן - סקריפט אתר */
 (function () {
   'use strict';
 
@@ -65,7 +65,7 @@
   }
 
   /* ============================================================
-     ✦ מוטיבים חיים של ריברסינג — דפים פנימיים בלבד (לא דף הבית)
+     ✦ מוטיבים חיים של ריברסינג - דפים פנימיים בלבד (לא דף הבית)
      מים אמיתיים (WebGL caustics) · גלים זורמים · בועות
      ============================================================ */
   const isHome = document.documentElement.classList.contains('home');
@@ -161,7 +161,7 @@
       resize();
 
       const start = (window.performance && performance.now) ? performance.now() : Date.now();
-      // כיבוד העדפת "הפחתת תנועה" — פריים סטטי אחד בלבד
+      // כיבוד העדפת "הפחתת תנועה" - פריים סטטי אחד בלבד
       if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
         gl.uniform1f(uT, 12.0);
         gl.drawArrays(gl.TRIANGLES, 0, 3);
@@ -193,7 +193,7 @@
     }
 
     /* ---------- הרכבת ההירו של המים בראש הדף ---------- */
-    // בדפים עם תמונת ים ברקע (bg-waves) — לא מזריקים מים מלאכותיים כלל
+    // בדפים עם תמונת ים ברקע (bg-waves) - לא מזריקים מים מלאכותיים כלל
     const head = document.querySelector('.page-head');
     if (head && !document.body.classList.contains('bg-waves')) {
       const cv = document.createElement('canvas');
@@ -212,6 +212,6 @@
       initWater(cv, 1.0);
     }
 
-    /* הערה: מפת היתרונות (poster) נשארת נקייה — ללא מים/מדיה, לפי בקשה */
+    /* הערה: מפת היתרונות (poster) נשארת נקייה - ללא מים/מדיה, לפי בקשה */
   }
 })();
