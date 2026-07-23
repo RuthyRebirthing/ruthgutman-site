@@ -114,9 +114,9 @@
         '}' +
         'c/=5.0;c=1.17-pow(c,1.4);' +
         'float glow=pow(abs(c),8.0);' +
-        'vec3 deep=vec3(0.035,0.24,0.27);' +
-        'vec3 mid=vec3(0.07,0.55,0.58);' +
-        'vec3 hi=vec3(0.82,0.97,0.93);' +
+        'vec3 deep=vec3(0.06,0.40,0.44);' +
+        'vec3 mid=vec3(0.12,0.63,0.66);' +
+        'vec3 hi=vec3(0.85,0.98,0.95);' +
         'vec3 col=mix(deep,mid,pow(uv.y,0.7));' +
         'col+=hi*glow*1.05;' +
         'col=mix(col,vec3(0.85,0.68,0.32),glow*0.10);' +
