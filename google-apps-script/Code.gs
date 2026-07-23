@@ -207,18 +207,14 @@ function couponInline(d) {
     '</td></tr>' +
     // קו מנוקב
     '<tr><td style="padding:0 24px"><div style="border-top:2px dashed #CBD9D7;height:1px"></div></td></tr>' +
-    // תחתית: מספר סידורי + תוקף
-    '<tr><td style="padding:16px 30px 24px">' +
-      '<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%"><tr>' +
-        '<td width="50%" style="text-align:right;vertical-align:top">' +
-          '<div style="font-size:12px;color:#8aa">מספר סידורי</div>' +
-          '<div style="font-size:24px;font-weight:800;color:' + GOLD + ';letter-spacing:2px">מס׳ ' + d.serial + '</div>' +
-        '</td>' +
-        '<td width="50%" style="text-align:left;vertical-align:bottom;padding-top:20px">' +
-          '<div style="font-size:12px;color:#8aa">בתוקף עד</div>' +
-          '<div style="font-size:17px;font-weight:700;color:' + INK + '">' + valid + '</div>' +
-        '</td>' +
-      '</tr></table>' +
+    // מספר סידורי - בולט וממורכז
+    '<tr><td style="padding:14px 30px 2px;text-align:center">' +
+      '<div style="font-size:12px;color:#8aa">מספר סידורי</div>' +
+      '<div style="font-size:26px;font-weight:800;color:' + GOLD + ';letter-spacing:2px">מס׳ ' + d.serial + '</div>' +
+    '</td></tr>' +
+    // תוקף - קטן, הכי למטה
+    '<tr><td style="padding:0 30px 16px;text-align:center">' +
+      '<div style="font-size:12px;color:#8aa">בתוקף עד ' + valid + '</div>' +
     '</td></tr>' +
     // רגל
     '<tr><td style="background:' + CREAM + ';padding:16px 26px 18px;text-align:center;border-top:1px solid #E1EFEC">' +

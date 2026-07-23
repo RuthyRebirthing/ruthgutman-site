@@ -34,6 +34,10 @@
 .gift-wrap{max-width:640px;margin:0 auto}
 .gift-card{background:var(--white);border-radius:24px;padding:30px 28px;
   box-shadow:0 24px 60px rgba(12,70,75,.14);border:1px solid #E1EFEC}
+/* מסכי האישור (שילמתי / הצלחה) - כרטיס צמוד לתוכן, בלי רווח מיותר */
+.gift-card.is-confirm{padding:20px 26px}
+#gift-step2 .paid-note{margin:10px 0}
+#gift-step2 form{margin:0}
 .gift-price{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:6px 0 18px}
 .gift-price b{font-size:3rem;color:var(--teal-700);line-height:1;font-weight:800}
 .gift-price .cur{font-size:1.6rem;color:var(--teal-500);font-weight:700}
@@ -248,6 +252,7 @@
   document.getElementById('yr').textContent = new Date().getFullYear();
 
   var form     = document.getElementById('gift-form');
+  var card     = document.querySelector('.gift-card');
   var step1    = document.getElementById('gift-step1');
   var step2    = document.getElementById('gift-step2');
   var step3    = document.getElementById('gift-step3');
@@ -312,6 +317,7 @@
     document.getElementById('h-delivery').value  = delivery();
 
     openBit();
+    card.classList.add('is-confirm');   // כרטיס צמוד לתוכן במסכי האישור
     step1.style.display = 'none';
     step2.classList.remove('gift-hidden');
     window.scrollTo({ top: 0, behavior: 'smooth' });
