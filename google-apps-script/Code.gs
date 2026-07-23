@@ -77,7 +77,7 @@ function handleApprove(p) {
     sh.getRange(rowNum, 11).setValue(issued);   // K issuedAt
     data.status = 'אושר'; data.serial = serial; data.issued = issued;
 
-    sendCouponEmail(data);
+    if (data.buyerEmail) sendCouponEmail(data);   // מייל נשלח רק אם נבחרה קבלה במייל
     return approvedPage(data, true);
   } finally {
     try { lock.releaseLock(); } catch (e) {}
@@ -103,6 +103,7 @@ function notifyRuthy(rowNum, token, p) {
     'הזמנת שובר מתנה חדשה\n' +
     'רוכש/ת: ' + s(p.buyerName) + '\n' +
     'מקבל/ת: ' + s(p.recipientName) + '\n' +
+    'קבלת הקופון: ' + s(p.deliveryMethod) + '\n' +
     'טלפון: ' + s(p.buyerPhone) + '\n' +
     'מייל: ' + s(p.buyerEmail) + '\n' +
     'סכום: ' + (p.amount || CFG.AMOUNT) + ' ₪\n' +
@@ -114,6 +115,7 @@ function notifyRuthy(rowNum, token, p) {
     '<h2 style="color:' + TEAL + '">הזמנת שובר מתנה חדשה</h2>' +
     '<table style="border-collapse:collapse;font-size:15px">' +
     tr('רוכש/ת', s(p.buyerName)) + tr('מקבל/ת', s(p.recipientName)) +
+    tr('קבלת הקופון', s(p.deliveryMethod)) +
     tr('טלפון', s(p.buyerPhone)) + tr('מייל', s(p.buyerEmail)) +
     tr('ברכה', s(p.greeting)) + tr('סכום', (p.amount || CFG.AMOUNT) + ' ₪') +
     '</table>' +
@@ -144,13 +146,21 @@ function approvedPage(d, fresh) {
   var waLink = 'https://wa.me/' + toIntl(d.buyerPhone) + '?text=' + encodeURIComponent(waText);
   var title = fresh ? 'נשלח!' : 'כבר אושר קודם';
 
+  // טקסט הסטטוס לפי אופן הקבלה שהרוכש בחר (מייל / וואטסאפ)
+  var status = d.buyerEmail
+    ? (fresh ? 'נשלח למייל ' + d.buyerEmail : 'הונפק כבר עבור ' + d.buyerEmail)
+    : (d.buyerPhone ? 'מוכן לשליחה בוואטסאפ ל-' + d.buyerPhone : 'הונפק');
+
+  var waBtn = d.buyerPhone
+    ? '<a href="' + waLink + '" target="_blank" style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;font-weight:bold;padding:13px 30px;border-radius:12px;font-size:16px;margin:6px">שלח/י ללקוח בוואטסאפ</a> '
+    : '';
+
   var html =
     '<div dir="rtl" style="font-family:Arial;max-width:560px;margin:30px auto;color:' + INK + ';text-align:center">' +
     '<h1 style="color:' + TEAL + '">' + title + '</h1>' +
-    '<p style="font-size:17px">קופון מס׳ <b>' + d.serial + '</b> ' +
-    (fresh ? 'נשלח למייל ' + d.buyerEmail : 'הונפק כבר עבור ' + d.buyerEmail) + '.</p>' +
+    '<p style="font-size:17px">קופון מס׳ <b>' + d.serial + '</b> ' + status + '.</p>' +
     '<div style="margin:22px 0">' + couponInline(d) + '</div>' +
-    '<a href="' + waLink + '" target="_blank" style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;font-weight:bold;padding:13px 30px;border-radius:12px;font-size:16px;margin:6px">שלח/י ללקוח בוואטסאפ</a> ' +
+    waBtn +
     '<a href="' + couponUrl + '" target="_blank" style="display:inline-block;background:' + TEAL + ';color:#fff;text-decoration:none;font-weight:bold;padding:13px 30px;border-radius:12px;font-size:16px;margin:6px">פתח/י את הקופון</a>' +
     '</div>';
   return HtmlService.createHtmlOutput(html);
@@ -193,7 +203,7 @@ function couponInline(d) {
       '<div style="font-size:26px;font-weight:800;color:' + TEAL_D + ';margin:4px 0 2px">' + esc(d.recipientName) + '</div>' +
       (greet ? '<div style="font-size:15px;color:#4A6E70;font-style:italic;margin:8px auto;max-width:420px">"' + esc(greet) + '"</div>' : '') +
       '<div style="font-size:16px;color:' + INK + ';margin-top:14px">מפגש ריברסינג אישי מלא</div>' +
-      '<div style="font-size:16px;color:' + TEAL + ';font-weight:700;margin-top:12px">באהבה, ליהנות מכל נשימה <span style="color:#1FA0A6">&#9829;</span></div>' +
+      '<div style="font-size:16px;color:' + TEAL + ';font-weight:700;margin-top:12px">&#8207;באהבה, ליהנות מכל נשימה <span style="color:#1FA0A6">&#9829;</span>&#8207;</div>' +
     '</td></tr>' +
     // קו מנוקב
     '<tr><td style="padding:0 24px"><div style="border-top:2px dashed #CBD9D7;height:1px"></div></td></tr>' +
