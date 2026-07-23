@@ -208,13 +208,13 @@ function couponInline(d) {
     // קו מנוקב
     '<tr><td style="padding:0 24px"><div style="border-top:2px dashed #CBD9D7;height:1px"></div></td></tr>' +
     // תחתית: מספר סידורי + תוקף
-    '<tr><td style="padding:16px 30px 22px">' +
+    '<tr><td style="padding:16px 30px 24px">' +
       '<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%"><tr>' +
-        '<td style="text-align:right;vertical-align:middle">' +
+        '<td width="50%" style="text-align:right;vertical-align:top">' +
           '<div style="font-size:12px;color:#8aa">מספר סידורי</div>' +
           '<div style="font-size:24px;font-weight:800;color:' + GOLD + ';letter-spacing:2px">מס׳ ' + d.serial + '</div>' +
         '</td>' +
-        '<td style="text-align:left;vertical-align:middle">' +
+        '<td width="50%" style="text-align:left;vertical-align:bottom;padding-top:20px">' +
           '<div style="font-size:12px;color:#8aa">בתוקף עד</div>' +
           '<div style="font-size:17px;font-weight:700;color:' + INK + '">' + valid + '</div>' +
         '</td>' +
