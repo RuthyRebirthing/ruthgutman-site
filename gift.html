@@ -282,6 +282,21 @@
   });
   syncDelivery();
 
+  // ---- זיכרון פרטי הרוכש ----
+  // הדפדפן לא "זוכר" לבד כי הטופס לא נשלח באמת (preventDefault),
+  // לכן שומרים ידנית ב-localStorage וממלאים אוטומטית בכניסה הבאה.
+  var MEM = 'rg_gift_buyer';
+  try {
+    var saved = JSON.parse(localStorage.getItem(MEM) || '{}');
+    if (saved.buyerName)  document.getElementById('g-buyer').value = saved.buyerName;
+    if (saved.buyerEmail) document.getElementById('g-email').value = saved.buyerEmail;
+    if (saved.buyerPhone) document.getElementById('g-phone').value = saved.buyerPhone;
+    if (saved.deliveryMethod) {
+      var savedRadio = document.querySelector('input[name="deliveryMethod"][value="' + saved.deliveryMethod + '"]');
+      if (savedRadio) { savedRadio.checked = true; syncDelivery(); }
+    }
+  } catch (e) {}
+
   function validate(){
     var ok = true;
     document.querySelectorAll('#gift-form [data-f]').forEach(function(f){
@@ -315,6 +330,16 @@
     document.getElementById('h-email').value     = val('g-email');
     document.getElementById('h-greeting').value  = val('g-msg');
     document.getElementById('h-delivery').value  = delivery();
+
+    // שמירת פרטי הרוכש לכניסה הבאה
+    try {
+      localStorage.setItem(MEM, JSON.stringify({
+        buyerName:  val('g-buyer'),
+        buyerEmail: val('g-email'),
+        buyerPhone: val('g-phone'),
+        deliveryMethod: delivery()
+      }));
+    } catch (e) {}
 
     openBit();
     card.classList.add('is-confirm');   // כרטיס צמוד לתוכן במסכי האישור
