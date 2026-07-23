@@ -183,7 +183,7 @@ function couponInline(d) {
   '<table role="presentation" cellpadding="0" cellspacing="0" style="width:640px;max-width:96%;margin:0 auto;border-collapse:separate;background:#ffffff;border:2px solid ' + GOLD + ';border-radius:18px;overflow:hidden;box-shadow:0 18px 46px rgba(12,70,75,.18)">' +
     // פס עליון
     '<tr><td style="background:' + TEAL_D + ';background:linear-gradient(135deg,' + TEAL + ',' + TEAL_D + ');padding:22px 26px;text-align:center">' +
-      '<div style="color:' + GOLD + ';font-size:13px;letter-spacing:3px;font-weight:bold">S H O V E R &nbsp; M A T A N A</div>' +
+      '<div style="color:' + GOLD + ';font-size:13px;letter-spacing:2px;font-weight:bold">Breathe &middot; Release &middot; Renew</div>' +
       '<div style="color:#fff;font-size:28px;font-weight:800;margin-top:6px">שובר מתנה</div>' +
       '<div style="color:#CDE9E6;font-size:15px;margin-top:4px">טיפול ריברסינג · נשימה טיפולית</div>' +
     '</td></tr>' +
@@ -193,7 +193,7 @@ function couponInline(d) {
       '<div style="font-size:26px;font-weight:800;color:' + TEAL_D + ';margin:4px 0 2px">' + esc(d.recipientName) + '</div>' +
       (greet ? '<div style="font-size:15px;color:#4A6E70;font-style:italic;margin:8px auto;max-width:420px">"' + esc(greet) + '"</div>' : '') +
       '<div style="font-size:16px;color:' + INK + ';margin-top:14px">מפגש ריברסינג אישי מלא</div>' +
-      '<div style="display:inline-block;margin-top:6px;background:' + CREAM + ';border:1px solid #CDE9E6;border-radius:30px;padding:6px 20px;font-size:15px;color:' + TEAL + ';font-weight:bold">בשווי ' + CFG.AMOUNT + ' ₪</div>' +
+      '<div style="font-size:16px;color:' + TEAL + ';font-weight:700;margin-top:12px">באהבה, ליהנות מכל נשימה <span style="color:#1FA0A6">&#9829;</span></div>' +
     '</td></tr>' +
     // קו מנוקב
     '<tr><td style="padding:0 24px"><div style="border-top:2px dashed #CBD9D7;height:1px"></div></td></tr>' +
