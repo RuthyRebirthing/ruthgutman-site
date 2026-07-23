@@ -221,7 +221,8 @@ function couponInline(d) {
       '</tr></table>' +
     '</td></tr>' +
     // רגל
-    '<tr><td style="background:' + CREAM + ';padding:14px 26px;text-align:center;border-top:1px solid #E1EFEC">' +
+    '<tr><td style="background:' + CREAM + ';padding:16px 26px 18px;text-align:center;border-top:1px solid #E1EFEC">' +
+      '<img src="https://' + CFG.BIZ_SITE + '/assets/logo_mark.png" alt="' + CFG.BIZ_NAME + '" width="56" height="56" style="width:56px;height:56px;border-radius:50%;display:block;margin:0 auto 8px">' +
       '<div style="font-size:14px;color:' + INK + ';font-weight:bold">' + CFG.BIZ_NAME + '</div>' +
       '<div style="font-size:13px;color:#4A6E70">לתיאום: ' + CFG.BIZ_PHONE + ' - ' + CFG.BIZ_SITE + '</div>' +
     '</td></tr>' +
