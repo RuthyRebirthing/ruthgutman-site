@@ -14,7 +14,7 @@ var CFG = {
   START_SERIAL:     1150,                       // המספר הסידורי הראשון
   VALID_MONTHS:     6,                          // תוקף הקופון בחודשים
   AMOUNT:           250,                        // מחיר הטיפול (₪)
-  BIZ_NAME:         'רותי גוטמן · ריברסינג',
+  BIZ_NAME:         'רותי גוטמן - ריברסינג',
   BIZ_PHONE:        '053-2771754',
   BIZ_SITE:         'ruthgutman.co.il'
 };
@@ -51,7 +51,7 @@ function doGet(e) {
   var a = (e && e.parameter && e.parameter.action) || '';
   if (a === 'approve') return handleApprove(e.parameter);
   if (a === 'coupon')  return showCoupon(e.parameter, false);
-  return HtmlService.createHtmlOutput('<div dir="rtl" style="font-family:Arial;padding:40px">שירות שוברי המתנה פעיל ✓</div>');
+  return HtmlService.createHtmlOutput('<div dir="rtl" style="font-family:Arial;padding:40px">שירות שוברי המתנה פעיל</div>');
 }
 
 /* ---------- אישור ושליחה ---------- */
@@ -91,7 +91,7 @@ function sendCouponEmail(d) {
     to: d.buyerEmail,
     replyTo: CFG.RUTHY_EMAIL,
     name: CFG.BIZ_NAME,
-    subject: '🎁 שובר המתנה שלך - טיפול ריברסינג (מס׳ ' + d.serial + ')',
+    subject: 'שובר המתנה שלך - טיפול ריברסינג (מס׳ ' + d.serial + ')',
     htmlBody: html
   });
 }
@@ -100,7 +100,7 @@ function sendCouponEmail(d) {
 function notifyRuthy(rowNum, token, p) {
   var approveUrl = webUrl() + '?action=approve&row=' + rowNum + '&token=' + token;
   var summary =
-    'הזמנת שובר מתנה חדשה 🎁\n' +
+    'הזמנת שובר מתנה חדשה\n' +
     'רוכש/ת: ' + s(p.buyerName) + '\n' +
     'מקבל/ת: ' + s(p.recipientName) + '\n' +
     'טלפון: ' + s(p.buyerPhone) + '\n' +
@@ -111,7 +111,7 @@ function notifyRuthy(rowNum, token, p) {
   // מייל עם כפתור "אשר ושלח"
   var mail =
     '<div dir="rtl" style="font-family:Arial;max-width:520px;margin:auto;color:' + INK + '">' +
-    '<h2 style="color:' + TEAL + '">הזמנת שובר מתנה חדשה 🎁</h2>' +
+    '<h2 style="color:' + TEAL + '">הזמנת שובר מתנה חדשה</h2>' +
     '<table style="border-collapse:collapse;font-size:15px">' +
     tr('רוכש/ת', s(p.buyerName)) + tr('מקבל/ת', s(p.recipientName)) +
     tr('טלפון', s(p.buyerPhone)) + tr('מייל', s(p.buyerEmail)) +
@@ -120,10 +120,10 @@ function notifyRuthy(rowNum, token, p) {
     '<p style="margin:24px 0 10px;color:#4A6E70">ודאי שהתשלום התקבל בביט, ואז לחצי:</p>' +
     '<a href="' + approveUrl + '" style="display:inline-block;background:' + TEAL +
     ';color:#fff;text-decoration:none;font-weight:bold;font-size:17px;padding:14px 34px;border-radius:12px">' +
-    '✓ אשר ושלח את הקופון</a>' +
+    'אשר ושלח את הקופון</a>' +
     '<p style="color:#93a;margin-top:22px;font-size:12px;color:#8aa">אם לא שולם - התעלמי מהמייל ולא יישלח דבר.</p>' +
     '</div>';
-  MailApp.sendEmail({ to: CFG.RUTHY_EMAIL, subject: '🎁 הזמנת קופון חדשה - ' + s(p.buyerName), htmlBody: mail });
+  MailApp.sendEmail({ to: CFG.RUTHY_EMAIL, subject: 'הזמנת קופון חדשה - ' + s(p.buyerName), htmlBody: mail });
 
   // וואטסאפ דרך CallMeBot
   if (CFG.CALLMEBOT_APIKEY && CFG.CALLMEBOT_APIKEY.indexOf('REPLACE') === -1) {
@@ -139,10 +139,10 @@ function notifyRuthy(rowNum, token, p) {
 /* ---------- מסך "אושר" לרותי (עם כפתור שליחה בוואטסאפ ללקוח) ---------- */
 function approvedPage(d, fresh) {
   var couponUrl = webUrl() + '?action=coupon&row=' + d.row + '&token=' + d.token;
-  var waText = 'שלום ' + d.recipientName + '! קיבלת שובר מתנה לטיפול ריברסינג 💜 ' +
+  var waText = 'שלום ' + d.recipientName + '! קיבלת שובר מתנה לטיפול ריברסינג ' +
                'הנה השובר שלך (מס׳ ' + d.serial + '): ' + couponUrl;
   var waLink = 'https://wa.me/' + toIntl(d.buyerPhone) + '?text=' + encodeURIComponent(waText);
-  var title = fresh ? 'נשלח! ✓' : 'כבר אושר קודם';
+  var title = fresh ? 'נשלח!' : 'כבר אושר קודם';
 
   var html =
     '<div dir="rtl" style="font-family:Arial;max-width:560px;margin:30px auto;color:' + INK + ';text-align:center">' +
@@ -169,7 +169,7 @@ function showCoupon(p, x) {
     '.bar{max-width:640px;margin:0 auto 18px;text-align:center}' +
     '.btn{display:inline-block;background:' + TEAL + ';color:#fff;text-decoration:none;font-weight:bold;padding:12px 26px;border-radius:12px;margin:4px;border:0;font-size:15px;cursor:pointer}' +
     '@media print{.bar{display:none}body{background:#fff;padding:0}}</style></head><body>' +
-    '<div class="bar"><button class="btn" onclick="window.print()">🖨️ הורדה / הדפסה (PDF)</button></div>' +
+    '<div class="bar"><button class="btn" onclick="window.print()">הורדה / הדפסה (PDF)</button></div>' +
     couponInline(d) +
     '</body></html>';
   return HtmlService.createHtmlOutput(html).addMetaTag('viewport', 'width=device-width, initial-scale=1');
@@ -185,7 +185,7 @@ function couponInline(d) {
     '<tr><td style="background:' + TEAL_D + ';background:linear-gradient(135deg,' + TEAL + ',' + TEAL_D + ');padding:22px 26px;text-align:center">' +
       '<div style="color:' + GOLD + ';font-size:13px;letter-spacing:2px;font-weight:bold">Breathe &middot; Release &middot; Renew</div>' +
       '<div style="color:#fff;font-size:28px;font-weight:800;margin-top:6px">שובר מתנה</div>' +
-      '<div style="color:#CDE9E6;font-size:15px;margin-top:4px">טיפול ריברסינג · נשימה טיפולית</div>' +
+      '<div style="color:#CDE9E6;font-size:15px;margin-top:4px">טיפול ריברסינג - נשימה טיפולית</div>' +
     '</td></tr>' +
     // גוף
     '<tr><td style="padding:26px 30px;text-align:center;color:' + INK + '">' +
@@ -202,7 +202,7 @@ function couponInline(d) {
       '<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%"><tr>' +
         '<td style="text-align:right;vertical-align:middle">' +
           '<div style="font-size:12px;color:#8aa">מספר סידורי</div>' +
-          '<div style="font-size:24px;font-weight:800;color:' + GOLD + ';letter-spacing:2px">№ ' + d.serial + '</div>' +
+          '<div style="font-size:24px;font-weight:800;color:' + GOLD + ';letter-spacing:2px">מס׳ ' + d.serial + '</div>' +
         '</td>' +
         '<td style="text-align:left;vertical-align:middle">' +
           '<div style="font-size:12px;color:#8aa">בתוקף עד</div>' +
@@ -213,7 +213,7 @@ function couponInline(d) {
     // רגל
     '<tr><td style="background:' + CREAM + ';padding:14px 26px;text-align:center;border-top:1px solid #E1EFEC">' +
       '<div style="font-size:14px;color:' + INK + ';font-weight:bold">' + CFG.BIZ_NAME + '</div>' +
-      '<div style="font-size:13px;color:#4A6E70">לתיאום: ' + CFG.BIZ_PHONE + ' · ' + CFG.BIZ_SITE + '</div>' +
+      '<div style="font-size:13px;color:#4A6E70">לתיאום: ' + CFG.BIZ_PHONE + ' - ' + CFG.BIZ_SITE + '</div>' +
     '</td></tr>' +
   '</table>';
 }
@@ -222,7 +222,7 @@ function couponEmail(d) {
   var couponUrl = webUrl() + '?action=coupon&row=' + d.row + '&token=' + d.token;
   return '<div dir="rtl" style="font-family:Arial;background:' + CREAM + ';padding:26px">' +
     '<p style="text-align:center;color:' + INK + ';font-size:16px;max-width:560px;margin:0 auto 20px">' +
-    'שלום ' + esc(d.recipientName) + ', קיבלת שובר מתנה 💜 להלן השובר שלך:</p>' +
+    'שלום ' + esc(d.recipientName) + ', קיבלת שובר מתנה להלן השובר שלך:</p>' +
     couponInline(d) +
     '<p style="text-align:center;margin:22px 0"><a href="' + couponUrl +
     '" style="display:inline-block;background:' + TEAL + ';color:#fff;text-decoration:none;font-weight:bold;padding:12px 28px;border-radius:12px">להורדה והדפסה של השובר</a></p>' +
