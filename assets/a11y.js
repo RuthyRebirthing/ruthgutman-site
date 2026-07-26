@@ -152,7 +152,11 @@
 
   /* ---------- הודעת עוגיות ---------- */
   function cookieBar() {
-    if (read(COOKIE_KEY, null)) return;
+    // ההודעה מוצגת בכל כניסה (session) לאתר, עד שלוחצים "הבנתי".
+    // sessionStorage נמחק בסגירת הדפדפן/סיום הגלישה - כך שבכניסה הבאה ההודעה תופיע שוב.
+    var seen;
+    try { seen = sessionStorage.getItem(COOKIE_KEY); } catch (e) { seen = null; }
+    if (seen) return;
     var bar = document.createElement('div');
     bar.className = 'cookie-bar';
     bar.setAttribute('role', 'region');
@@ -166,7 +170,8 @@
 
     bar.addEventListener('click', function (e) {
       if (e.target.classList.contains('cb-accept')) {
-        write(COOKIE_KEY, { choice: 'acknowledged', at: new Date().toISOString() });
+        // נשמר לכניסה הנוכחית בלבד - נעלם עד סוף הגלישה, ובכניסה חדשה יופיע שוב.
+        try { sessionStorage.setItem(COOKIE_KEY, '1'); } catch (er) {}
         bar.remove();
       }
     });
