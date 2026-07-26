@@ -148,10 +148,10 @@
           </div>
           <div class="form-field">
             <label for="cf-phone">טלפון</label>
-            <input type="tel" id="cf-phone" name="טלפון" required>
+            <input type="tel" id="cf-phone" name="טלפון">
           </div>
           <div class="form-field">
-            <label for="cf-email">אימייל <span style="color:var(--muted);font-weight:400;font-size:.9em">(למי שאין וואטסאפ)</span></label>
+            <label for="cf-email">אימייל</label>
             <input type="email" id="cf-email" name="אימייל" autocomplete="email">
           </div>
           <div class="form-field">
@@ -209,10 +209,24 @@
   var pending = false;
   var hideTimer;
 
-  form.addEventListener('submit', function () {
+  form.addEventListener('submit', function (e) {
+    // חובה להשאיר לפחות דרך אחת ליצירת קשר - טלפון או אימייל
+    var phone = document.getElementById('cf-phone').value.trim();
+    var email = document.getElementById('cf-email').value.trim();
+    if (!phone && !email) {
+      e.preventDefault();
+      clearTimeout(hideTimer);
+      toast.style.color = '#c0392b';
+      toast.innerHTML = 'נא להשאיר טלפון או אימייל כדי שנוכל לחזור אליכם.';
+      toast.style.display = 'block';
+      void toast.offsetWidth;
+      toast.classList.add('is-visible');
+      document.getElementById('cf-phone').focus();
+      return;
+    }
     try {
       document.getElementById('cf-consent-time').value = new Date().toLocaleString('he-IL');
-    } catch (e) { /* לא חוסם את השליחה */ }
+    } catch (e2) { /* לא חוסם את השליחה */ }
     pending = true;
     btn.disabled = true;
     btn.textContent = 'שולח…';
@@ -229,6 +243,7 @@
     btn.disabled = false;
     btn.textContent = 'שליחת הודעה';
 
+    toast.style.color = '';
     toast.innerHTML = '<span aria-hidden="true">✓</span> ההודעה נשלחה בהצלחה! אחזור אליכם בהקדם.';
     toast.style.display = 'block';
     // מאלץ חישוב מחדש כדי שמעבר ה-opacity ירוץ מיד אחרי display:block
