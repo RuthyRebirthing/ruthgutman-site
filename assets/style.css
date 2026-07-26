@@ -345,6 +345,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;color:var(--te
 .footer-credit b{font-weight:800;color:var(--teal-300)}
 .footer-credit a{display:inline;color:var(--teal-300);font-weight:800;text-decoration:none}
 .footer-credit a:hover{color:var(--teal-200);text-decoration:underline}
+.credit-heart{font-size:1.18em;line-height:1;vertical-align:-0.06em;margin-inline-start:2px}
 .footer-social{display:flex;gap:12px;margin-top:16px}
 .footer-social a{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;padding:0}
 .footer-social a:hover{background:var(--gold)}
