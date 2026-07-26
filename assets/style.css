@@ -445,9 +445,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;color:var(--te
 .hero-video__text h1 .word{display:inline-block;opacity:0;filter:blur(8px);transform:translateY(18px)}
 .hero-video__text h1 .accent{color:#fff}
 .hero-video__tagline{
-  margin:16px 0 0;color:var(--gold-soft);font-weight:700;font-family:var(--serif);
+  margin:16px 0 0;color:#0B3B40;font-weight:800;font-family:var(--serif);
   font-size:clamp(2.1rem,5.2vw,3.5rem);line-height:1.2;
-  text-shadow:0 5px 28px rgba(0,0,0,.55);
+  text-shadow:0 1px 3px rgba(255,255,255,.5), 0 4px 22px rgba(0,0,0,.4);
   opacity:0;transform:translateY(18px);transition:opacity 1s ease, transform 1s ease;
 }
 .hero-video__tagline.show{opacity:1;transform:none}

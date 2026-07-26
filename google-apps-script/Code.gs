@@ -13,7 +13,7 @@ var CFG = {
   CALLMEBOT_APIKEY: 'REPLACE_WITH_CALLMEBOT_KEY', // מפתח מ-CallMeBot (ראה הוראות שלב 4)
   START_SERIAL:     1150,                       // המספר הסידורי הראשון
   VALID_MONTHS:     6,                          // תוקף הקופון בחודשים
-  AMOUNT:           250,                        // מחיר הטיפול (₪)
+  AMOUNT:           300,                        // מחיר הטיפול (₪)
   BIZ_NAME:         'רותי גוטמן - ריברסינג',
   BIZ_PHONE:        '053-2771754',
   BIZ_SITE:         'ruthgutman.co.il'
