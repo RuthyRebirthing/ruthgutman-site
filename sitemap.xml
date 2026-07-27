@@ -19,6 +19,24 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://ruthgutman.co.il/articles.html</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ruthgutman.co.il/postpartum.html</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ruthgutman.co.il/teens.html</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://ruthgutman.co.il/gift.html</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
