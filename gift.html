@@ -36,6 +36,7 @@
   box-shadow:0 24px 60px rgba(12,70,75,.14);border:1px solid #E1EFEC}
 /* מסכי האישור (שילמתי / הצלחה) - כרטיס צמוד לתוכן, בלי רווח מיותר */
 .gift-card.is-confirm{padding:20px 26px}
+#gift-step2{text-align:center}
 #gift-step2 .paid-note{margin:10px 0}
 #gift-step2 form{margin:0}
 .gift-price{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:6px 0 18px}
@@ -185,10 +186,10 @@
         <div id="gift-step2" class="gift-hidden">
           <div class="step-badge"><i>2</i> אישור התשלום</div>
           <div class="paid-note">
-            נפתחה עבורך אפליקציית ביט לתשלום של <b>300 ₪</b>.<br>
-            אם היא לא נפתחה - <a href="#" id="g-reopen">לחצי כאן לפתיחה מחדש</a>.
+            שלחו <b>300 ₪</b> באפליקציית ביט למספר <b dir="ltr">053-3353425</b>.<br>
+            לא נפתחה ביט? <a href="#" id="g-reopen">לחץ/י כאן לפתיחה</a>.
           </div>
-          <p style="color:var(--ink);font-weight:600;margin:6px 0 14px">סיימת לשלם? לחצי כאן כדי שנכין ונשלח אליך את השובר:</p>
+          <p style="color:var(--ink);font-weight:600;margin:6px 0 14px">סיימת לשלם? לחץ/י כאן כדי שנכין ונשלח אליך את השובר:</p>
 
           <!-- שליחה ל-iframe נסתר כדי שהדף לא יתחלף (עוקף CORS) -->
           <iframe name="gift-sink" id="gift-sink" style="display:none" title="יעד שליחה נסתר" aria-hidden="true"></iframe>
@@ -245,8 +246,8 @@
   /* ============================================================
      הגדרות - יש למלא שני ערכים בלבד (ראה google-apps-script/הוראות-הקמה.md)
      ============================================================ */
-  // 1) קישור בקשת התשלום שלך בביט (300 ₪). מחליפים את הכתובת הזו בלינק האמיתי מהאפליקציה.
-  var BIT_LINK   = 'bit://pay?phone=972500000000';
+  // 1) קישור בקשת התשלום שלך בביט (300 ₪). כרגע פתיחת ביט למספר 053-3353425 (הרוכש מקליד 300 ₪).
+  var BIT_LINK   = 'bit://pay?phone=972533353425';
   // 2) כתובת ה-Web App של Google Apps Script (מסתיימת ב-/exec)
   var SCRIPT_URL = 'REPLACE_WITH_APPS_SCRIPT_URL';
   /* ============================================================ */

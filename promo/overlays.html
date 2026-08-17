@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<style>
+  :root{
+    --teal-900:#0C464B; --teal-700:#14676C; --teal-500:#2E8F92; --teal-300:#8FC8C2;
+    --mint:#CFEDE8; --cream:#F6F1E6; --ivory:#FBFEFD; --gold:#D9A94C; --gold-l:#E7C97E;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:transparent}
+  body{width:1080px;height:1920px;overflow:hidden;
+       font-family:Tahoma,Arial,system-ui;-webkit-font-smoothing:antialiased}
+  .frame{position:absolute;inset:0;width:1080px;height:1920px;display:none}
+  .frame.on{display:block}
+
+  .center{position:absolute;left:0;right:0;text-align:center}
+
+  /* ====== typography ====== */
+  .kicker{display:inline-block;font-size:30px;letter-spacing:.28em;font-weight:700;
+    color:var(--gold-l);text-shadow:0 3px 18px rgba(0,0,0,.55)}
+  .kicker.dark{color:var(--teal-700);text-shadow:none}
+  .h1{font-size:104px;line-height:1.12;font-weight:700;color:#fff;
+      text-shadow:0 6px 34px rgba(4,32,35,.75), 0 2px 6px rgba(4,32,35,.6)}
+  .h1.gold{color:var(--gold-l)}
+  .h2{font-size:80px;line-height:1.15;font-weight:700;color:#fff;
+      text-shadow:0 6px 30px rgba(4,32,35,.7)}
+  .sub{font-size:40px;line-height:1.45;color:#EAF7F5;font-weight:400;
+       text-shadow:0 3px 18px rgba(4,32,35,.7)}
+
+  /* pill / tag */
+  .pill{display:inline-flex;align-items:center;gap:16px;padding:16px 40px;border-radius:999px;
+    background:linear-gradient(135deg,rgba(12,70,75,.92),rgba(20,103,108,.92));
+    border:2px solid rgba(217,169,76,.75);
+    box-shadow:0 18px 50px rgba(4,32,35,.45);
+    font-size:32px;font-weight:700;color:var(--gold-l);letter-spacing:.06em}
+  .pill .dot{width:14px;height:14px;border-radius:50%;background:var(--gold);
+    box-shadow:0 0 18px rgba(217,169,76,.9)}
+
+  .rule{width:220px;height:3px;margin:0 auto;border-radius:2px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+
+  .logo{width:230px;height:230px;border-radius:50%;display:block;margin:0 auto;
+    box-shadow:0 26px 70px rgba(4,32,35,.55), 0 0 0 3px rgba(217,169,76,.55)}
+  .logo.sm{width:104px;height:104px;box-shadow:0 12px 34px rgba(4,32,35,.5),0 0 0 2px rgba(217,169,76,.5)}
+  .logo.xl{width:330px;height:330px}
+
+  .row{display:flex;align-items:center;justify-content:center;gap:26px}
+
+  /* ====== caption bar for site flashes ====== */
+  .capwrap{position:absolute;left:0;right:0;bottom:0;height:520px;
+    background:linear-gradient(to top,rgba(6,42,46,.96) 4%,rgba(6,42,46,.82) 42%,rgba(6,42,46,0) 100%)}
+  .capin{position:absolute;left:0;right:0;bottom:96px;text-align:center}
+  .cap-t{font-size:74px;font-weight:700;color:#fff;line-height:1.15;
+    text-shadow:0 6px 26px rgba(0,0,0,.6)}
+  .cap-s{margin-top:20px;font-size:36px;color:#BFE6E0;line-height:1.4}
+
+  /* top brand strip */
+  .brand{position:absolute;top:70px;left:0;right:0;display:flex;align-items:center;
+    justify-content:center;gap:24px}
+  .brand .txt{text-align:right}
+  .brand .n{font-size:44px;font-weight:700;color:#fff;text-shadow:0 4px 20px rgba(4,32,35,.7)}
+  .brand .r{font-size:26px;color:var(--gold-l);letter-spacing:.14em;margin-top:6px;
+    text-shadow:0 3px 14px rgba(4,32,35,.7)}
+
+  .url{display:inline-block;font-size:62px;font-weight:700;color:#0C464B;
+    background:linear-gradient(135deg,#F7E7BE,#E7C97E 45%,#D9A94C);
+    padding:22px 60px;border-radius:999px;letter-spacing:.02em;direction:ltr;
+    box-shadow:0 22px 60px rgba(4,32,35,.5), inset 0 2px 0 rgba(255,255,255,.6)}
+  .phone{font-size:46px;font-weight:700;color:#fff;direction:ltr;
+    text-shadow:0 4px 20px rgba(4,32,35,.7)}
+  .tap{font-size:36px;color:#CFEDE8;text-shadow:0 3px 16px rgba(4,32,35,.7)}
+
+  .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;padding:0 90px}
+  .chip{font-size:34px;font-weight:700;color:#0C464B;background:rgba(255,255,255,.94);
+    padding:14px 34px;border-radius:999px;box-shadow:0 12px 34px rgba(4,32,35,.35)}
+</style>
+</head>
+<body>
+
+<!-- 1: brand strip (top of hero) -->
+<div class="frame" id="f1">
+  <div class="brand">
+    <img class="logo sm" src="site/assets/logo_mark.png">
+    <div class="txt">
+      <div class="n">רותי גוטמן</div>
+      <div class="r">מטפלת רגשית בריברסינג</div>
+    </div>
+  </div>
+</div>
+
+<!-- 2: hero line 1 -->
+<div class="frame" id="f2">
+  <div class="center" style="top:1010px"><div class="h1">לשאוף גבוה,</div></div>
+</div>
+
+<!-- 3: hero line 2 -->
+<div class="frame" id="f3">
+  <div class="center" style="top:1140px"><div class="h1 gold">לנשום לרווחה...</div></div>
+</div>
+
+<!-- 4: hero kicker -->
+<div class="frame" id="f4">
+  <div class="center" style="top:1320px">
+    <div class="rule" style="margin-bottom:34px"></div>
+    <span class="kicker">ריברסינג &nbsp;·&nbsp; נשימה טיפולית</span>
+  </div>
+</div>
+
+<!-- 5: name card -->
+<div class="frame" id="f5">
+  <div class="center" style="top:700px">
+    <img class="logo" src="site/assets/logo_mark.png">
+    <div style="height:56px"></div>
+    <div class="h1">רותי גוטמן</div>
+    <div style="height:26px"></div>
+    <div class="sub">מטפלת רגשית בריברסינג · אשדוד</div>
+    <div style="height:44px"></div>
+    <div class="chips">
+      <span class="chip">ילדים</span>
+      <span class="chip">נערות</span>
+      <span class="chip">נשים</span>
+      <span class="chip">אחרי לידה</span>
+    </div>
+  </div>
+</div>
+
+<!-- 6..10: captions -->
+<div class="frame" id="f6">
+  <div class="capwrap"></div>
+  <div class="capin">
+    <div class="pill"><span class="dot"></span>נשימה טיפולית</div>
+    <div style="height:34px"></div>
+    <div class="cap-t">מהו ריברסינג?</div>
+    <div class="cap-s">הגוף יודע לרפא את עצמו — דרך הנשימה</div>
+  </div>
+</div>
+
+<div class="frame" id="f7">
+  <div class="capwrap"></div>
+  <div class="capin">
+    <div class="pill"><span class="dot"></span>מאמרים</div>
+    <div style="height:34px"></div>
+    <div class="cap-t">מהקליניקה, אליכן</div>
+    <div class="cap-s">נשימה אחרי לידה · ריברסינג לנערות</div>
+  </div>
+</div>
+
+<div class="frame" id="f8">
+  <div class="capwrap"></div>
+  <div class="capin">
+    <div class="pill"><span class="dot"></span>אודותיי</div>
+    <div style="height:34px"></div>
+    <div class="cap-t">נעים להכיר</div>
+    <div class="cap-s">מרחב בטוח, רך ומכיל — בכל גיל ובכל שלב</div>
+  </div>
+</div>
+
+<div class="frame" id="f9">
+  <div class="capwrap"></div>
+  <div class="capin">
+    <div class="pill"><span class="dot"></span>שובר מתנה</div>
+    <div style="height:34px"></div>
+    <div class="cap-t">מתנה שנוגעת בלב</div>
+    <div class="cap-s">מפגש ריברסינג אישי · שובר יפהפה תוך זמן קצר</div>
+  </div>
+</div>
+
+<div class="frame" id="f10">
+  <div class="capwrap"></div>
+  <div class="capin">
+    <div class="pill"><span class="dot"></span>שאלות נפוצות</div>
+    <div style="height:34px"></div>
+    <div class="cap-t">כל מה שרציתן לדעת</div>
+    <div class="cap-s">איך מפגש נראה? למי זה מתאים? ומה מרגישים?</div>
+  </div>
+</div>
+
+<!-- 11: end – logo -->
+<div class="frame" id="f11">
+  <div class="center" style="top:430px">
+    <img class="logo xl" src="site/assets/logo_mark.png">
+  </div>
+</div>
+
+<!-- 12: end – headline -->
+<div class="frame" id="f12">
+  <div class="center" style="top:830px">
+    <div class="h2">הנשימה הראשונה שלך<br>מתחילה כאן</div>
+  </div>
+</div>
+
+<!-- 13: end – url -->
+<div class="frame" id="f13">
+  <div class="center" style="top:1130px">
+    <span class="url">ruthgutman.co.il</span>
+  </div>
+</div>
+
+<!-- 14: end – contact -->
+<div class="frame" id="f14">
+  <div class="center" style="top:1330px">
+    <div class="tap">לתיאום מפגש &nbsp;·&nbsp; וואטסאפ / טלפון</div>
+    <div style="height:22px"></div>
+    <div class="phone">053-2771754</div>
+    <div style="height:40px"></div>
+    <div class="rule"></div>
+    <div style="height:30px"></div>
+    <div class="sub" style="font-size:34px">רותי גוטמן · ריברסינג · אשדוד</div>
+  </div>
+</div>
+
+<script>
+  var i = new URLSearchParams(location.search).get('i') || '1';
+  var el = document.getElementById('f' + i);
+  if (el) el.classList.add('on');
+</script>
+</body>
+</html>
