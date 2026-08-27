@@ -38,6 +38,17 @@
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="assets/a11y.css">
 
+<!-- במסך צר דף הבית מרכז את כל דפי האתר בגלילה אחת (assets/mobile-onepage.js).
+     הכיתה מוחלפת כאן, לפני הציור הראשון, כדי שהעיצוב לא "יקפוץ". -->
+<script>
+(function () {
+  if (window.matchMedia && matchMedia('(max-width:1080px)').matches) {
+    document.documentElement.classList.remove('home');
+    document.documentElement.classList.add('home-mob');
+  }
+}());
+</script>
+
 <!-- Schema.org - עסק מקומי + מטפלת -->
 <script type="application/ld+json">
 {
@@ -100,7 +111,7 @@
 </header>
 
 <!-- ============ HOME: סרטון מסך-מלא + לוגו בלבד ============ -->
-<section class="hero-video">
+<section class="hero-video" id="top">
   <video class="hero-video__bg" autoplay muted loop playsinline poster="assets/video_poster.jpg">
     <source src="assets/video.mp4" type="video/mp4">
     הדפדפן שלך אינו תומך בהצגת וידאו.
@@ -112,6 +123,12 @@
       <span class="word">ריברסינג</span> <span class="word">-</span> <span class="word">נשימה</span> <span class="word accent">טיפולית</span>
     </h1>
     <p class="hero-video__tagline">לשאוף גבוה, לנשום לרווחה...</p>
+  </div>
+
+  <!-- רמז גלילה - מוצג רק בתצוגת מובייל, שבה כל האתר נפרש מכאן ומטה -->
+  <div class="scroll-hint" aria-hidden="true">
+    <span>לגלול לכל האתר</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
   </div>
 </section>
 
@@ -161,6 +178,7 @@
 </footer>
 
 <script src="assets/main.js"></script>
+<script src="assets/mobile-onepage.js"></script>
 <script src="assets/a11y.js"></script>
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 </body>
