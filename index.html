@@ -38,11 +38,25 @@
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="assets/a11y.css">
 
-<!-- במסך צר דף הבית מרכז את כל דפי האתר בגלילה אחת (assets/mobile-onepage.js).
-     הכיתה מוחלפת כאן, לפני הציור הראשון, כדי שהעיצוב לא "יקפוץ". -->
+<!-- בפלאפון/טאבלט דף הבית מרכז את כל דפי האתר בגלילה אחת (assets/mobile-onepage.js).
+     הכיתה מוחלפת כאן, לפני הציור הראשון, כדי שהעיצוב לא "יקפוץ".
+
+     ⚠ הזיהוי דורש מסך מגע (pointer:coarse) ולא רק רוחב: במחשב עם הגדלת
+     תצוגה של Windows או zoom בדפדפן הרוחב האפקטיבי יורד מתחת לכל סף
+     סביר, ובדיקת רוחב בלבד הפעילה את תצוגת המובייל גם במחשב.
+     לבדיקה במחשב אפשר להוסיף ?onepage=1 לכתובת (ו-?onepage=0 לביטול). -->
 <script>
 (function () {
-  if (window.matchMedia && matchMedia('(max-width:1080px)').matches) {
+  var force = (location.search.match(/[?&]onepage=([01])/) || [])[1];
+  var on;
+  if (force) {
+    on = (force === '1');
+  } else {
+    on = !!window.matchMedia &&
+         matchMedia('(max-width:1080px)').matches &&
+         matchMedia('(pointer:coarse)').matches;
+  }
+  if (on) {
     document.documentElement.classList.remove('home');
     document.documentElement.classList.add('home-mob');
   }
